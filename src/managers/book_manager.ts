@@ -23,7 +23,6 @@ export default class BookManager {
         return value.id === categoryId
       })
       .get()
-    console.log(books)
     return books
   }
 

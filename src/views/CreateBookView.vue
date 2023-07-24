@@ -14,7 +14,6 @@
         <MyInputText v-model="author" :placeholder="'Author'" />
       </div>
     </div>
-    <div class=""></div>
     <MyButton class="mt-96" @click="onSave()" :text="'Save'"></MyButton>
   </div>
 </template>
@@ -24,13 +23,10 @@ import MyButton from '@/components/MyButton.vue'
 import MyInputText from '@/components/MyInputText.vue'
 import 'primeicons/primeicons.css'
 import { ref } from 'vue'
-import { useRepo } from 'pinia-orm'
 import { useRouter } from 'vue-router'
 import CategoryManager from '@/managers/category_manager'
 import BookManager from '@/managers/book_manager'
 import Category from '@/models/category'
-import CategoryData from '@/data/category_data'
-import { C } from 'pinia-orm/dist/Data-77556be8'
 const props = defineProps({
   id: {
     type: String,

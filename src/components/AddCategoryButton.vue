@@ -7,14 +7,13 @@
 </template>
 
 <script setup lang="ts">
-// import Button from 'primevue/button'
 import 'primeicons/primeicons.css'
 
 defineEmits(['toggle'])
 </script>
 <style scoped>
 #plusBut:hover {
-  box-shadow: 0px 0px 5px 5px rgba(157, 29, 168, 0.3);
+  box-shadow: 0px 0px 7px 7px rgba(157, 29, 168, 0.3);
 }
 
 #ico:hover {
@@ -28,9 +27,11 @@ defineEmits(['toggle'])
 
 #plusBut {
   border-radius: 100%;
-
+  margin-left: 8px;
   width: 50px;
   height: 50px;
   background-color: rgb(16, 16, 16);
+  box-shadow: 0px 0px 5px 5px rgba(157, 29, 168, 0.3);
+
 }
 </style>

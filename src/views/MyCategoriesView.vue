@@ -58,8 +58,6 @@ const doToggle = () => {
 
 const submit = (category: string) => {
   repo.save({ category })
-  console.log(repo.all())
-
   doToggle()
   categoryString.value = ''
 }

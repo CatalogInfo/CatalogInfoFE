@@ -45,10 +45,7 @@ import AddCategoryButton from '@/components/AddCategoryButton.vue'
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import BookManager from '../managers/book_manager'
-import CategoryManager from '@/managers/category_manager'
 import BookItem from '@/components/BookItem.vue'
-import Book from '../models/book'
-import Category from '@/models/category'
 
 const router = useRouter()
 
@@ -58,8 +55,6 @@ const props = defineProps({
     required: true
   }
 })
-
-const category: Category = <Category>CategoryManager.getCategoryById(props.id)
 
 const booksRef = ref(BookManager.getBooksByCategory(props.id))
 
