@@ -10,7 +10,7 @@
             </div>
           </template>
           <div class="flex justify-end">
-            <AddCategoryButton class @click="createBook()"></AddCategoryButton>
+            <!-- <AddCategoryButton class @click="createBook()"></AddCategoryButton> -->
           </div>
         </TabPanel>
 
@@ -27,11 +27,12 @@
               <span>articles</span>
             </div>
           </template>
-          <AddCategoryButton></AddCategoryButton>
         </TabPanel>
       </TabView>
     </div>
-    <div class="w-3/4 h-96">
+    <div class="flex flex-col self-start w-1/4">
+      <AddCategoryButton class="mb-8" @click="createBook()"></AddCategoryButton>
+
       <BookItem v-for="book in books" :key="book.id" :item="book"> </BookItem>
     </div>
   </div>

@@ -14,5 +14,5 @@ export default class Category extends Model {
 
   declare id: string
   declare category: string
-  declare books: Book[];
+  declare books: Book[]
 }
