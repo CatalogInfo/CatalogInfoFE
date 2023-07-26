@@ -4,7 +4,7 @@
       <!-- <p class="font-bold text-lg font-sans text-[#2c5e50]">Create category</p> -->
     </div>
 
-    <AddCategoryButton @toggle="doToggle()" />
+    <AddButton @toggle="doToggle()" />
 
     <SearchBarVue />
 
@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 import CreateCategoryView from './CreateCategoryView.vue'
-import AddCategoryButton from '@/components/AddCategoryButton.vue'
+import AddButton from '@/components/AddButton.vue'
 import 'primeicons/primeicons.css'
 import category from '../models/category'
 import { useRepo } from 'pinia-orm'
