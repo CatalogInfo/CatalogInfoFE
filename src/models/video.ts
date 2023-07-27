@@ -10,7 +10,7 @@ export default class Video extends Model {
       category: this.belongsTo(Category, 'categoryId'),
       link: this.string(''),
       title: this.string(''),
-      chanelTitle: this.string('')
+      channelTitle: this.string('')
     }
   }
 
@@ -18,5 +18,5 @@ export default class Video extends Model {
   declare category: Category
   declare link: string
   declare title: string
-  declare chanelTitle: string
+  declare channelTitle: string
 }

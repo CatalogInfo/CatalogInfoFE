@@ -1,16 +1,19 @@
 <template>
-  <Button id="itemBut" class="flex flex-col bg-black rounded-lg">
-    <div class="flex flex-col w-full space-y-4">
-      <span class="rounded-b-xl bg-[#7c3aed] mt-0">
-        <p class="text-center font-normal text-white font-serif">{{ item.name.toUpperCase() }}</p>
+  <Button id="itemBut" class="flex flex-row bg-black rounded-lg">
+    <div class="rounded-lg p-4 bg-[#1a1a1a]">
+      <IconBook></IconBook>
+    </div>
+    <div id="text" class="flex flex-col ml-10 w-full space-y-4">
+      <span class="rounded-b-xl mt-0">
+        <p class="text-left font-semibold text-xl text-white">{{ item.name }}</p>
       </span>
       <div class="flex flex-row space-x-2">
         <IconStyle />
-        <p class="text-left font-thin font-serif">{{ item.style }}</p>
+        <p class="text-left font-thin">{{ item.style }}</p>
       </div>
       <div class="flex flex-row space-x-2">
         <IconFeather />
-        <p class="text-left font-thin font-serif">{{ item.author }}</p>
+        <p class="text-left font-thin">{{ item.author }}</p>
       </div>
     </div>
   </Button>
@@ -21,6 +24,7 @@ import Button from 'primevue/button'
 import Book from '@/models/book'
 import IconFeather from '../components/icons/IconFeather.vue'
 import IconStyle from '../components/icons/IconStyle.vue'
+import IconBook from "../components/icons/IconBook.vue";
 defineProps({
   item: {
     type: Book,
@@ -43,5 +47,9 @@ defineProps({
   /* border: 1px solid #a2148d; */
   color: rgb(179, 179, 179);
   box-shadow: 0px 0px 4px 4px #822e75;
+}
+
+#text {
+  font-family: Roboto, Arial, sans-serif;
 }
 </style>

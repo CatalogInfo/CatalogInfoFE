@@ -1,6 +1,7 @@
 import BaseApiResponse from "@/response/base_api_response";
 import api_factory from "@/api/api_factory";
 
+
 export default class YoutubeManager {
 
   static api_key: string = "AIzaSyDpVzijXYtuFgFK4-HsLmSkrBSDGfuBvpE";
@@ -13,14 +14,18 @@ export default class YoutubeManager {
     return link.substring(17);
   }
 
-  public static async getInfoFromLink(link: string) {
+  public static async getInfoFromLink(link: string): Promise<VideoApiInfo> {
     const url: string = "/videos?part=id%2C+snippet&id=" 
     + this.getIdFromLink(link) 
     + "&key=" + YoutubeManager.api_key;
     
     const response: BaseApiResponse<string> = await api_factory.getInstance().get<string>(url);
-    const dataString: string = response.data.toString();
-    const data = JSON.parse(dataString);
-    // console.log(data.items);
+    const data = JSON.parse(JSON.stringify(response.data));
+
+    console.log(data);
+    const title = data.items[0].snippet.title;
+    const channelTitle = data.items[0].snippet.channelTitle;
+
+    return { title: title, channelTitle: channelTitle };
   }
 }

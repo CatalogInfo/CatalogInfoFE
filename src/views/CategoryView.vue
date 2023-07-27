@@ -30,11 +30,11 @@
       </TabView>
     </div>
     <div class="flex flex-col self-start w-1/4" v-if="getActive() === 0">
-      <AddButton class=" mt-2" @click="createBook()" />
+      <AddButton class="mt-2" @click="createBook()" />
 
-      <BookItem v-for="book in books" :key="book.id" :item="book" />
+      <BookItem class="mt-4" v-for="book in books" :key="book.id" :item="book" />
     </div>
-    <div class="flex flex-col self-start w-1/4" v-if="getActive() === 1">
+    <div class="flex flex-col self-start w-1/3" v-if="getActive() === 1">
       <InputSlideBar
         @doToggle="doToggle()"
         @submit="submit()"
@@ -83,11 +83,11 @@ const doToggle = () => {
   toggle.value = !toggle.value
 }
 
-const submit = () => {
+const submit = async () => {
   const cat = CategoryManager.getCategoryById(props.id) as Category
   const linkString: string = BufferManager.get()?.value as string;
 
-  VideoManager.createVideo(linkString, cat)
+  await VideoManager.createVideo(linkString, cat)
 
   doToggle()
 
