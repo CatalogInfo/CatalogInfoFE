@@ -1,23 +1,15 @@
 <template>
   <div class="flex flex-col">
-    <div class="card flex flex-col justify-center items-center pt-4">
-      <!-- <p class="font-bold text-lg font-sans text-[#2c5e50]">Create category</p> -->
+    <div class="mt-5 flex flex-col">
+      <InputSlideBar
+        @doToggle="doToggle()"
+        @submit="submit()"
+        :toggle="toggle"
+        :valueString="categoryString"
+      />
     </div>
-
-    <AddButton @toggle="doToggle()" />
 
     <SearchBarVue />
-
-    <div v-show="toggle" class="absolute z-0 w-full h-full bg-black opacity-50"></div>
-
-    <div class="z-100 relative flex flex-col items-center justify-center">
-      <CreateCategoryView
-        :category="categoryString"
-        @submit="submit"
-        @toggle="doToggle"
-        v-show="toggle"
-      ></CreateCategoryView>
-    </div>
 
     <div class="relative z-10 w-1/6 grid grid-cols-1 mt-10">
       <CategoryItem
@@ -31,8 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import CreateCategoryView from './CreateCategoryView.vue'
-import AddButton from '@/components/AddButton.vue'
+import InputSlideBar from '../components/InputSlideBar.vue'
 import 'primeicons/primeicons.css'
 import category from '../models/category'
 import { useRepo } from 'pinia-orm'
@@ -41,14 +32,16 @@ import { ref } from 'vue'
 import SearchBarVue from '@/components/SearchBar.vue'
 import CategoryItem from '../components/CategoryItem.vue'
 import { useRouter } from 'vue-router'
+import CategoryManager from '@/managers/category_manager'
+import BufferManager from '@/managers/buffer_manager'
 
 const router = useRouter()
 
 const repo = useRepo(category)
 
-const categoryString = ref('')
-
 const data = ref()
+
+const categoryString = ref('')
 
 const toggle = ref(false)
 
@@ -56,12 +49,11 @@ const doToggle = () => {
   toggle.value = !toggle.value
 }
 
-const submit = (category: string) => {
-  repo.save({ category })
+const submit = () => {
+  CategoryManager.createCategory(BufferManager.get()?.value as string)
   doToggle()
   categoryString.value = ''
 }
-
 watch(
   () => repo.all(),
   (state) => {
@@ -69,5 +61,3 @@ watch(
   }
 )
 </script>
-
-<style></style>

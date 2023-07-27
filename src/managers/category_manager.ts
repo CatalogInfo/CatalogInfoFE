@@ -15,7 +15,7 @@ export default class CategoryManager {
     return this.repository.find(id)
   }
 
-  static createCategory(category: Category) {
-    this.repository.save(category)
+  static createCategory(category: string) {
+    this.repository.save({ category })
   }
 }

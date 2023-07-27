@@ -29,22 +29,25 @@
         </TabPanel>
       </TabView>
     </div>
-    <div class="flex flex-col self-start w-1/4 " v-if="getActive() === 0">
-      <AddButton class="mb-8" @click="createBook()"/>
+    <div class="flex flex-col self-start w-1/4" v-if="getActive() === 0">
+      <AddButton class=" mt-2" @click="createBook()" />
 
-      <BookItem v-for="book in books" :key="book.id" :item="book"/>
+      <BookItem v-for="book in books" :key="book.id" :item="book" />
     </div>
-    <div class="flex flex-col self-start w-1/4 " v-if="getActive() === 1">
-      <AddButton class="mb-8" @click="createBook()"/>
-      <YouTube 
-        src="https://youtu.be/jydFemSB46s" 
-        @ready="onReady"
-        :width="'200px'"
-        :height="'150px'"
-        ref="youtube" />
-      <!-- <VideoItem v-for="video in videos" :key="video.id" /> -->
+    <div class="flex flex-col self-start w-1/4" v-if="getActive() === 1">
+      <InputSlideBar
+        @doToggle="doToggle()"
+        @submit="submit()"
+        :toggle="toggle"
+        :valueString="link"
+      ></InputSlideBar>
+      <VideoItem
+      class="mt-4"
+        v-for="video in videos"
+        :key="video.id"
+        :item="video"
+      />
     </div>
-    
   </div>
 </template>
 
@@ -53,13 +56,16 @@ import TabView from 'primevue/tabview'
 import 'primeicons/primeicons.css'
 import TabPanel from 'primevue/tabpanel'
 import AddButton from '@/components/AddButton.vue'
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import BookManager from '../managers/book_manager'
-import VideoManager from "../managers/video_manager";
+import InputSlideBar from '../components/InputSlideBar.vue'
+import VideoManager from '../managers/video_manager'
 import BookItem from '@/components/BookItem.vue'
-import VideoItem from '@/components/VideoItem.vue'
-import YouTube from 'vue3-youtube'
+import VideoItem from "@/components/VideoItem.vue"
+import BufferManager from '@/managers/buffer_manager'
+import Category from '@/models/category'
+import CategoryManager from '@/managers/category_manager'
 
 const router = useRouter()
 
@@ -68,23 +74,35 @@ const props = defineProps({
     type: String,
     required: true
   }
-});
+})
 
-const onReady = () => {
-  YouTube.$refs.youtube.playVideo();
+const link = ref('')
+const toggle = ref(false)
+
+const doToggle = () => {
+  toggle.value = !toggle.value
 }
 
-const active = ref(0);
+const submit = () => {
+  const cat = CategoryManager.getCategoryById(props.id) as Category
+  const linkString: string = BufferManager.get()?.value as string;
+
+  VideoManager.createVideo(linkString, cat)
+
+  doToggle()
+
+  link.value = ''
+}
+
+const active = ref(0)
 
 const getActive = () => {
-  return active.value;
+  return active.value
 }
 
-const booksRef = ref(BookManager.getBooksByCategory(props.id))
-const videoRef = ref(VideoManager.getVideoByCategory(props.id));
+const books = ref(computed(() => BookManager.getBooksByCategory(props.id)))
+const videos = ref(computed(() => VideoManager.getVideoByCategory(props.id)));
 
-const books = computed(() => booksRef.value)
-const videos = computed(() => videoRef.value)
 
 const createBook = () => {
   router.push('/categories/' + props.id + '/book')

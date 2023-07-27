@@ -2,19 +2,21 @@ import { Model } from 'pinia-orm'
 import Category from './category'
 
 export default class Video extends Model {
-  static entity = 'book'
+  static entity = 'video'
 
   static fields() {
     return {
       id: this.uid(10),
       category: this.belongsTo(Category, 'categoryId'),
-      name: this.string(''),
-      link: this.string('')
+      link: this.string(''),
+      title: this.string(''),
+      chanelTitle: this.string('')
     }
   }
 
-  declare id: number
+  declare id: string
   declare category: Category
-  declare name: string
   declare link: string
+  declare title: string
+  declare chanelTitle: string
 }

@@ -15,7 +15,7 @@ export default class Book extends Model {
     }
   }
 
-  declare id: number
+  declare id: string
   declare category: Category
   declare name: string
   declare style: string

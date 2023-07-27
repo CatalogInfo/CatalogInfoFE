@@ -2,7 +2,7 @@ import Video from '@/models/video'
 import Category from '@/models/category'
 import { Collection, useRepo } from 'pinia-orm'
 import store from '../store/store'
-import VideoData from '@/data/video_data'
+import YoutubeManager from '@/managers/youtube_manager'
 
 export default class VideoManager {
   protected static get repository() {
@@ -26,7 +26,10 @@ export default class VideoManager {
     return videos
   }
 
-  static createVideo(video: VideoData) {
-    this.repository.save(video)
+  static createVideo(link: string, category: Category) {
+    if( link != '' && link != null && link != undefined ) {
+      this.repository.save({link: link, category: category});
+      YoutubeManager.getInfoFromLink(link);
+    }
   }
 }

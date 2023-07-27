@@ -11,7 +11,6 @@ export default class Category extends Model {
       category: this.attr(0),
       books: this.hasMany(Book, 'categoryId'),
       videos: this.hasMany(Video, 'categoryId')
-
     }
   }
 
