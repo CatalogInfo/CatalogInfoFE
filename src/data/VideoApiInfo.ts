@@ -1,4 +1,4 @@
-interface VideoApiInfo{
-    title: string,
-    channelTitle: string
+interface VideoApiInfo {
+  title: string
+  channelTitle: string
 }

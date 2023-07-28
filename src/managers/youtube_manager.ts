@@ -1,31 +1,28 @@
-import BaseApiResponse from "@/response/base_api_response";
-import api_factory from "@/api/api_factory";
-
+import BaseApiResponse from '@/response/base_api_response'
+import api_factory from '@/api/api_factory'
 
 export default class YoutubeManager {
-
-  static api_key: string = "AIzaSyDpVzijXYtuFgFK4-HsLmSkrBSDGfuBvpE";
+  static api_key: string = 'AIzaSyDpVzijXYtuFgFK4-HsLmSkrBSDGfuBvpE'
 
   private static getIdFromLink(link: string): string {
-    if (link.includes("watch?v")) {
-      return link.substring(link.indexOf('=') + 1, link.indexOf('&'));
+    if (link.includes('watch?v')) {
+      return link.substring(link.indexOf('=') + 1, link.indexOf('&'))
     }
 
-    return link.substring(17);
+    return link.substring(17)
   }
 
   public static async getInfoFromLink(link: string): Promise<VideoApiInfo> {
-    const url: string = "/videos?part=id%2C+snippet&id=" 
-    + this.getIdFromLink(link) 
-    + "&key=" + YoutubeManager.api_key;
-    
-    const response: BaseApiResponse<string> = await api_factory.getInstance().get<string>(url);
-    const data = JSON.parse(JSON.stringify(response.data));
+    const url: string =
+      '/videos?part=id%2C+snippet&id=' + this.getIdFromLink(link) + '&key=' + YoutubeManager.api_key
 
-    console.log(data);
-    const title = data.items[0].snippet.title;
-    const channelTitle = data.items[0].snippet.channelTitle;
+    const response: BaseApiResponse<string> = await api_factory.getInstance().get<string>(url)
+    const data = JSON.parse(JSON.stringify(response.data))
 
-    return { title: title, channelTitle: channelTitle };
+    console.log(data)
+    const title = data.items[0].snippet.title
+    const channelTitle = data.items[0].snippet.channelTitle
+
+    return { title: title, channelTitle: channelTitle }
   }
 }

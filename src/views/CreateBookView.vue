@@ -7,7 +7,7 @@
         <MyInputText v-model="name" :placeholder="'Name'" />
       </div>
       <div class="row-span-5 w-96 h-64 bg-[#18181b] rounded">
-        <UploadFile @upload="upload($event)"/>
+        <UploadFile @upload="upload($event)" />
       </div>
       <div>
         <MyInputText v-model="style" :placeholder="'Style'" />
@@ -40,7 +40,7 @@ const props = defineProps({
 
 const router = useRouter()
 
-const fileVal = ref("");
+const fileVal = ref('')
 const name = ref('')
 const style = ref('')
 const author = ref('')
@@ -62,17 +62,16 @@ const back = () => {
   router.push('/categories/' + props.id)
 }
 
-const upload = async(e: any) => {
-  const [file] = e.target.files;
-  if (!file) return;
-  const text = await file.text();
-  console.log(text);
-  fileVal.value = formatPararaphsAndSpaces(text);
+const upload = async (e: any) => {
+  const [file] = e.target.files
+  if (!file) return
+  const text = await file.text()
+  console.log(text)
+  fileVal.value = formatPararaphsAndSpaces(text)
 }
 
-function formatPararaphsAndSpaces (str: string) {
-     return (str + '').replace(/(\r\n|\n|\r)/gm,  "<br>" + "&nbsp;&nbsp;");
-} 
-
+function formatPararaphsAndSpaces(str: string) {
+  return (str + '').replace(/(\r\n|\n|\r)/gm, '<br>' + '&nbsp;&nbsp;')
+}
 </script>
 <style scoped></style>

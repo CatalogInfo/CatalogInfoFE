@@ -2,19 +2,14 @@
   <Button id="itemBut" class="flex flex-row bg-black rounded-lg">
     <div class="flex flex-row w-full">
       <div class="flex flex-col">
-      <YouTube
-        :src="item.link"
-        :width="'200px'"
-        :height="'150px'"
-      />
-      <!-- <div class="flex mt-3 items-center justify-center">
+        <YouTube :src="item.link" :width="'200px'" :height="'150px'" />
+        <!-- <div class="flex mt-3 items-center justify-center">
         <p class="text-center font-thin font-serif">{{ item.channelTitle }}</p>
       </div> -->
       </div>
       <div class="flex flex-col justify-center ml-4 w-full bg-[#161616] rounded-lg space-y-8">
         <p id="title" class="ml-4 text-left font-semibold text-white text-lg">{{ item.title }}</p>
         <p id="author" class="ml-4 text-left font-thin font-serif">{{ item.channelTitle }}</p>
-
       </div>
     </div>
   </Button>
@@ -31,7 +26,6 @@ defineProps({
     required: true
   }
 })
-
 </script>
 <style scoped>
 #itemBut {
@@ -49,12 +43,11 @@ defineProps({
 }
 
 #title {
-    font-family: Roboto, Arial, sans-serif;
+  font-family: Roboto, Arial, sans-serif;
 }
 
 #author {
-    font-family: Roboto, Arial, sans-serif;
-    color: #AAAAAA;
+  font-family: Roboto, Arial, sans-serif;
+  color: #aaaaaa;
 }
-
 </style>

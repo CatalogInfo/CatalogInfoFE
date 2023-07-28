@@ -6,20 +6,18 @@
   </div>
 </template>
 <script setup lang="ts">
-import BookManager from "@/managers/book_manager"
-import Book from "@/models/book";
-
+import BookManager from '@/managers/book_manager'
+import Book from '@/models/book'
 
 const props = defineProps({
-    bookId: {
-        type: String,
-        required: true,
-    }
+  bookId: {
+    type: String,
+    required: true
+  }
 })
 
 const getText = () => {
-    const book: Book = <Book>BookManager.getBookById(props.bookId);
-    return book.text; 
+  const book: Book = <Book>BookManager.getBookById(props.bookId)
+  return book.text
 }
-
 </script>

@@ -27,11 +27,15 @@ export default class VideoManager {
   }
 
   static async createVideo(link: string, category: Category) {
-    if( link != '' && link != null && link != undefined ) {
+    if (link != '' && link != null && link != undefined) {
+      const info: VideoApiInfo = await YoutubeManager.getInfoFromLink(link)
 
-      const info: VideoApiInfo = await YoutubeManager.getInfoFromLink(link);
-
-      this.repository.save({link: link, category: category, title: info.title, channelTitle: info.channelTitle });
+      this.repository.save({
+        link: link,
+        category: category,
+        title: info.title,
+        channelTitle: info.channelTitle
+      })
     }
   }
 }

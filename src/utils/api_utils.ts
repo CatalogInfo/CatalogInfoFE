@@ -1,18 +1,18 @@
-import { HttpMethod } from "@/enums/http_method";
+import { HttpMethod } from '@/enums/http_method'
 
 export default class ApiUtils {
   static httpMethodToString(method: HttpMethod) {
     switch (method) {
       case HttpMethod.GET:
-        return "GET";
+        return 'GET'
       case HttpMethod.POST:
-        return "POST";
+        return 'POST'
       case HttpMethod.PUT:
-        return "PUT";
+        return 'PUT'
       case HttpMethod.DELETE:
-        return "DELETE";
+        return 'DELETE'
       default:
-        throw new Error(`Unknown HttpMethod: ${method}`);
+        throw new Error(`Unknown HttpMethod: ${method}`)
     }
   }
 }

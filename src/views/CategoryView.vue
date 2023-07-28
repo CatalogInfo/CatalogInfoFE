@@ -9,8 +9,7 @@
               <span>books</span>
             </div>
           </template>
-          <div class="flex justify-end">
-          </div>
+          <div class="flex justify-end"></div>
         </TabPanel>
         <TabPanel>
           <template #header>
@@ -31,7 +30,13 @@
     <div class="ml-2 flex flex-col self-start w-1/4" v-if="getActive() === 0">
       <AddButton class="mt-2" @click="createBook()" />
 
-      <BookItem class="mt-4" v-for="book in books" :key="book.id" :item="book" @click="goToBook(book.id)" />
+      <BookItem
+        class="mt-4"
+        v-for="book in books"
+        :key="book.id"
+        :item="book"
+        @click="goToBook(book.id)"
+      />
     </div>
     <div class="ml-2 flex flex-col self-start w-1/3" v-if="getActive() === 1">
       <InputSlideBar
@@ -41,12 +46,7 @@
         :valueString="link"
       ></InputSlideBar>
 
-      <VideoItem
-      class="mt-4"
-        v-for="video in videos"
-        :key="video.id"
-        :item="video"
-      />
+      <VideoItem class="mt-4" v-for="video in videos" :key="video.id" :item="video" />
     </div>
   </div>
 </template>
@@ -62,7 +62,7 @@ import BookManager from '../managers/book_manager'
 import InputSlideBar from '../components/InputSlideBar.vue'
 import VideoManager from '../managers/video_manager'
 import BookItem from '@/components/BookItem.vue'
-import VideoItem from "@/components/VideoItem.vue"
+import VideoItem from '@/components/VideoItem.vue'
 import BufferManager from '@/managers/buffer_manager'
 import Category from '@/models/category'
 import CategoryManager from '@/managers/category_manager'
@@ -85,7 +85,7 @@ const doToggle = () => {
 
 const submit = async () => {
   const cat = CategoryManager.getCategoryById(props.id) as Category
-  const linkString: string = BufferManager.get()?.value as string;
+  const linkString: string = BufferManager.get()?.value as string
 
   await VideoManager.createVideo(linkString, cat)
 
@@ -101,11 +101,10 @@ const getActive = () => {
 }
 
 const books = ref(computed(() => BookManager.getBooksByCategory(props.id)))
-const videos = ref(computed(() => VideoManager.getVideoByCategory(props.id)));
+const videos = ref(computed(() => VideoManager.getVideoByCategory(props.id)))
 
 const goToBook = (id: string) => {
   router.push('/categories/' + props.id + '/book/' + id)
-
 }
 
 const createBook = () => {

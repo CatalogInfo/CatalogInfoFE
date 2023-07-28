@@ -1,4 +1,3 @@
 export default interface VideoApiResponse {
-    // items: Array<>,
-  }
-  
+  // items: Array<>,
+}
