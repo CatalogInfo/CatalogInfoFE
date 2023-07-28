@@ -16,13 +16,13 @@ export default class YoutubeManager {
     const url: string =
       '/videos?part=id%2C+snippet&id=' + this.getIdFromLink(link) + '&key=' + this.api_key
 
-    const response: BaseApiResponse<string> = await api_factory.getInstance().get<string>(url);
+    const response: BaseApiResponse<string> = await api_factory.getInstance().get<string>(url)
 
-    const data = JSON.parse(JSON.stringify(response.data));
+    const data = JSON.parse(JSON.stringify(response.data))
 
-    const title = data.items[0].snippet.title;
-    const channelTitle = data.items[0].snippet.channelTitle;
+    const title = data.items[0].snippet.title
+    const channelTitle = data.items[0].snippet.channelTitle
 
-    return { title: title, channelTitle: channelTitle };
+    return { title: title, channelTitle: channelTitle }
   }
 }

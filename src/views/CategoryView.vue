@@ -43,6 +43,8 @@
         @submit="submit()"
         :toggle="toggle"
         :valueString="link"
+        :wrong-input-placeholder="'empty input'"
+        :placeholder="'link'"
       ></InputSlideBar>
 
       <VideoItem class="mt-4" v-for="video in videos" :key="video.id" :item="video" />

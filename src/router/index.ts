@@ -35,7 +35,7 @@ const router = createRouter({
     {
       path: '/create',
       name: 'about',
-      component: MyCategoriesViewVue,
+      component: MyCategoriesViewVue
     }
   ]
 })

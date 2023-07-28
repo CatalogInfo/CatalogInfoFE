@@ -17,7 +17,6 @@
       </div>
     </div>
     <MyButton class="mt-24" @click="onSave()" :text="'Save'"></MyButton>
-
   </div>
 </template>
 <script setup lang="ts">

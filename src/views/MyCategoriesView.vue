@@ -6,6 +6,8 @@
         @submit="submit()"
         :toggle="toggle"
         :valueString="categoryString"
+        :wrongInputPlaceholder="'empty input'"
+        :placeholder="'name'"
       />
     </div>
 
@@ -48,9 +50,12 @@ const doToggle = () => {
 
 const submit = () => {
   CategoryManager.createCategory(BufferManager.get()?.value as string)
-  doToggle()
-  categoryString.value = ''
+  if (BufferManager.get()?.value != '') {
+    doToggle()
+    categoryString.value = ''
+  }
 }
+
 watch(
   () => repo.all(),
   (state) => {

@@ -8,8 +8,16 @@
         v-show="toggle"
         class="flex flex-row bg-[#101010] rounded-r-2xl h-full justify-center items-center"
       >
-        <input id="inp" placeholder="name" class="ml-16 mr-2 p-2 rounded-xl" v-model="value" @keyup.enter="submit()" required/>
-      </div> 
+        <input
+          id="inp"
+          :placeholder="tip"
+          class="ml-16 mr-2 p-2 rounded-xl"
+          @focusout="focusout"
+          v-model="value"
+          @input="normalizeInputStyle"
+          @keyup.enter="submit()"
+        />
+      </div>
     </Transition>
   </div>
 </template>
@@ -20,6 +28,9 @@ import { ref } from 'vue'
 import BufferManager from '../../managers/buffer_manager'
 
 const emit = defineEmits(['doToggle', 'submit'])
+
+const emptyStyleColor = 'red';
+
 const props = defineProps({
   toggle: {
     type: Boolean,
@@ -28,15 +39,54 @@ const props = defineProps({
   valueString: {
     type: String,
     default: ''
+  },
+  wrongInputPlaceholder: {
+    type: String,
+    default: ''
+  },
+  placeholder: {
+    type: String,
+    default: ''
   }
 })
 
+
+const tip = ref(props.placeholder);
+
+const normalInputStyle = '0px transparent';
+const emptyInputStyle = '1px solid ' + emptyStyleColor;
+let inputStyle = ref('0px transparent')
+
+const focusout = () => {
+  normalizeInputStyle();
+
+  if (props.toggle === true) {
+    emit('doToggle');
+  }
+}
+
 const value = ref(props.valueString)
 
+const normalizeInputStyle = () => {
+  inputStyle.value = normalInputStyle
+  tip.value = props.placeholder;
+}
+
+const stressInputStyle = () => {
+  inputStyle.value = emptyInputStyle
+  tip.value = props.wrongInputPlaceholder;
+}
+
 const submit = () => {
+  if (value.value === '') {
+    stressInputStyle()
+    return
+  } 
+
   BufferManager.updateBuffer(value.value)
   emit('submit')
   value.value = ''
+  
 }
 </script>
 
@@ -53,10 +103,6 @@ const submit = () => {
   transition: all 0.3s;
 }
 
-.inp:invalid {
-    background-color: red;
-}
-
 .slide-fade-leave-active {
   transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
 }
@@ -67,7 +113,7 @@ const submit = () => {
 }
 
 #inp {
-  border: 0px transparent;
+  border: v-bind('inputStyle');
   background-color: #2c2b2b;
 }
 
