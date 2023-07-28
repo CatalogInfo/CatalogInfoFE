@@ -10,7 +10,6 @@
             </div>
           </template>
           <div class="flex justify-end">
-            <!-- <AddCategoryButton class @click="createBook()"></AddCategoryButton> -->
           </div>
         </TabPanel>
         <TabPanel>
@@ -29,18 +28,19 @@
         </TabPanel>
       </TabView>
     </div>
-    <div class="flex flex-col self-start w-1/4" v-if="getActive() === 0">
+    <div class="ml-2 flex flex-col self-start w-1/4" v-if="getActive() === 0">
       <AddButton class="mt-2" @click="createBook()" />
 
-      <BookItem class="mt-4" v-for="book in books" :key="book.id" :item="book" />
+      <BookItem class="mt-4" v-for="book in books" :key="book.id" :item="book" @click="goToBook(book.id)" />
     </div>
-    <div class="flex flex-col self-start w-1/3" v-if="getActive() === 1">
+    <div class="ml-2 flex flex-col self-start w-1/3" v-if="getActive() === 1">
       <InputSlideBar
         @doToggle="doToggle()"
         @submit="submit()"
         :toggle="toggle"
         :valueString="link"
       ></InputSlideBar>
+
       <VideoItem
       class="mt-4"
         v-for="video in videos"
@@ -56,7 +56,7 @@ import TabView from 'primevue/tabview'
 import 'primeicons/primeicons.css'
 import TabPanel from 'primevue/tabpanel'
 import AddButton from '@/components/AddButton.vue'
-import { ref, computed, watch } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import BookManager from '../managers/book_manager'
 import InputSlideBar from '../components/InputSlideBar.vue'
@@ -103,6 +103,10 @@ const getActive = () => {
 const books = ref(computed(() => BookManager.getBooksByCategory(props.id)))
 const videos = ref(computed(() => VideoManager.getVideoByCategory(props.id)));
 
+const goToBook = (id: string) => {
+  router.push('/categories/' + props.id + '/book/' + id)
+
+}
 
 const createBook = () => {
   router.push('/categories/' + props.id + '/book')

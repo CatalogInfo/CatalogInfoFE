@@ -10,6 +10,7 @@ export default class Book extends Model {
       category: this.belongsTo(Category, 'categoryId'),
       name: this.string(''),
       style: this.string(''),
+      text: this.string(''),
       description: this.string(''),
       author: this.string('')
     }
@@ -19,6 +20,7 @@ export default class Book extends Model {
   declare category: Category
   declare name: string
   declare style: string
+  declare text: string
   declare description: string
   declare author: string
 }
