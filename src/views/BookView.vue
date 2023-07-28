@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="w-1/2 mt-10 ml-10 bg-[#1e1e1e] p-4 rounded-xl">
+  <div class="flex flex-row items-center justify-center">
+    <div class="self-center w-1/2 mt-10 bg-[#1e1e1e] p-4 rounded-xl">
       <div class="text-left" v-html="getText()"></div>
     </div>
   </div>

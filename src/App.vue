@@ -19,8 +19,8 @@ const items = ref([
 </script>
 
 <template>
-  <div class="card flex flex-col overscroll-y-none">
-    <div>
+  <div class="card flex flex-col">
+    <div class="sticky top-0 z-20 bg-[#121212]">
       <TabMenu :model="items" />
     </div>
     <router-view />
