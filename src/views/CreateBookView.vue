@@ -7,7 +7,7 @@
         <MyInputText v-model="name" :placeholder="'Name'" />
       </div>
       <div class="row-span-5 w-96 h-64 bg-[#18181b] rounded">
-        <UploadFile @upload="upload($event)" />
+        <UploadFile @upload="uploadFile($event)" />
       </div>
       <div>
         <MyInputText v-model="style" :placeholder="'Style'" />
@@ -30,6 +30,7 @@ import CategoryManager from '@/managers/category_manager'
 import BookManager from '@/managers/book_manager'
 import Category from '@/models/category'
 import UploadFile from '@/components/UploadFile.vue'
+import FileUtils from '../utils/file_utils'
 
 const props = defineProps({
   id: {
@@ -62,16 +63,8 @@ const back = () => {
   router.push('/categories/' + props.id)
 }
 
-const upload = async (e: any) => {
-  const [file] = e.target.files
-  if (!file) return
-  const text = await file.text()
-  console.log(text)
-  fileVal.value = formatPararaphsAndSpaces(text)
-}
-
-function formatPararaphsAndSpaces(str: string) {
-  return (str + '').replace(/(\r\n|\n|\r)/gm, '<br>' + '&nbsp;&nbsp;')
+const uploadFile = async (e: Event) => {
+  fileVal.value = <string>await FileUtils.upload(e, 4)
 }
 </script>
 <style scoped></style>

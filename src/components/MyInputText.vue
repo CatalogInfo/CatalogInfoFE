@@ -35,6 +35,7 @@ defineProps({
   outline: none;
   border-bottom: 1px solid #ae3b9d;
 }
+
 #inp {
   border-bottom: 1px solid #8b207b;
 }

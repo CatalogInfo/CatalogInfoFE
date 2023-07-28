@@ -9,7 +9,6 @@
               <span>books</span>
             </div>
           </template>
-          <div class="flex justify-end"></div>
         </TabPanel>
         <TabPanel>
           <template #header>
@@ -67,8 +66,6 @@ import BufferManager from '@/managers/buffer_manager'
 import Category from '@/models/category'
 import CategoryManager from '@/managers/category_manager'
 
-const router = useRouter()
-
 const props = defineProps({
   id: {
     type: String,
@@ -76,32 +73,33 @@ const props = defineProps({
   }
 })
 
+const router = useRouter()
+
+const active = ref(0)
 const link = ref('')
 const toggle = ref(false)
+
+const books = ref(computed(() => BookManager.getBooksByCategory(props.id)))
+const videos = ref(computed(() => VideoManager.getVideoByCategory(props.id)))
 
 const doToggle = () => {
   toggle.value = !toggle.value
 }
 
 const submit = async () => {
-  const cat = CategoryManager.getCategoryById(props.id) as Category
+  const category = CategoryManager.getCategoryById(props.id) as Category
   const linkString: string = BufferManager.get()?.value as string
 
-  await VideoManager.createVideo(linkString, cat)
+  await VideoManager.createVideo(linkString, category)
 
   doToggle()
 
   link.value = ''
 }
 
-const active = ref(0)
-
 const getActive = () => {
   return active.value
 }
-
-const books = ref(computed(() => BookManager.getBooksByCategory(props.id)))
-const videos = ref(computed(() => VideoManager.getVideoByCategory(props.id)))
 
 const goToBook = (id: string) => {
   router.push('/categories/' + props.id + '/book/' + id)

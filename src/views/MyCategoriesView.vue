@@ -36,13 +36,10 @@ import CategoryManager from '@/managers/category_manager'
 import BufferManager from '@/managers/buffer_manager'
 
 const router = useRouter()
-
 const repo = useRepo(category)
 
 const data = ref()
-
 const categoryString = ref('')
-
 const toggle = ref(false)
 
 const doToggle = () => {

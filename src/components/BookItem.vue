@@ -34,7 +34,6 @@ defineProps({
 </script>
 <style scoped>
 #itemBut {
-  /* background-color: rgb(21, 21, 21); */
   background-color: rgb(16, 16, 16);
 
   border: 2px solid #822e75;
@@ -44,7 +43,6 @@ defineProps({
 
 #itemBut:hover {
   background-color: black;
-  /* border: 1px solid #a2148d; */
   color: rgb(179, 179, 179);
   box-shadow: 0px 0px 4px 4px #822e75;
 }

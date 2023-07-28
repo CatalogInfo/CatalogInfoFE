@@ -3,9 +3,6 @@
     <div class="flex flex-row w-full">
       <div class="flex flex-col">
         <YouTube :src="item.link" :width="'200px'" :height="'150px'" />
-        <!-- <div class="flex mt-3 items-center justify-center">
-        <p class="text-center font-thin font-serif">{{ item.channelTitle }}</p>
-      </div> -->
       </div>
       <div class="flex flex-col justify-center ml-4 w-full bg-[#161616] rounded-lg space-y-8">
         <p id="title" class="ml-4 text-left font-semibold text-white text-lg">{{ item.title }}</p>
@@ -37,7 +34,6 @@ defineProps({
 
 #itemBut:hover {
   background-color: black;
-  /* border: 1px solid #a2148d; */
   color: rgb(179, 179, 179);
   box-shadow: 0px 0px 4px 4px #822e75;
 }

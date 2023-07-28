@@ -61,10 +61,12 @@ const submit = () => {
 .slide-fade-leave-to {
   transform: translateX(-300px);
 }
+
 #inp {
   border: 0px transparent;
   background-color: #2c2b2b;
 }
+
 #inp:focus {
   outline: none;
 }
