@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import category from '../models/category'
+import category from '../../models/category'
 import Button from 'primevue/button'
 
 defineProps({

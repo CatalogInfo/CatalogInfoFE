@@ -14,15 +14,15 @@ export default class YoutubeManager {
 
   public static async getInfoFromLink(link: string): Promise<VideoApiInfo> {
     const url: string =
-      '/videos?part=id%2C+snippet&id=' + this.getIdFromLink(link) + '&key=' + YoutubeManager.api_key
+      '/videos?part=id%2C+snippet&id=' + this.getIdFromLink(link) + '&key=' + this.api_key
 
-    const response: BaseApiResponse<string> = await api_factory.getInstance().get<string>(url)
-    const data = JSON.parse(JSON.stringify(response.data))
+    const response: BaseApiResponse<string> = await api_factory.getInstance().get<string>(url);
 
-    console.log(data)
-    const title = data.items[0].snippet.title
-    const channelTitle = data.items[0].snippet.channelTitle
+    const data = JSON.parse(JSON.stringify(response.data));
 
-    return { title: title, channelTitle: channelTitle }
+    const title = data.items[0].snippet.title;
+    const channelTitle = data.items[0].snippet.channelTitle;
+
+    return { title: title, channelTitle: channelTitle };
   }
 }

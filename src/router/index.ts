@@ -4,6 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import CreateBookView from '../views/CreateBookView.vue'
 import BookView from '../views/BookView.vue'
+import MyCategoriesViewVue from '../views/MyCategoriesView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,7 +35,7 @@ const router = createRouter({
     {
       path: '/create',
       name: 'about',
-      component: () => import('../views/MyCategoriesView.vue')
+      component: MyCategoriesViewVue,
     }
   ]
 })

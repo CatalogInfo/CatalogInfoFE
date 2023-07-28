@@ -8,16 +8,16 @@
         v-show="toggle"
         class="flex flex-row bg-[#101010] rounded-r-2xl h-full justify-center items-center"
       >
-        <input id="inp" class="ml-16 mr-2 p-2 rounded-xl" v-model="value" @keyup.enter="submit()" />
-      </div>
+        <input id="inp" placeholder="name" class="ml-16 mr-2 p-2 rounded-xl" v-model="value" @keyup.enter="submit()" required/>
+      </div> 
     </Transition>
   </div>
 </template>
 
 <script setup lang="ts">
-import AddButton from '@/components/AddButton.vue'
+import AddButton from '@/components/buttons/AddButton.vue'
 import { ref } from 'vue'
-import BufferManager from '../managers/buffer_manager'
+import BufferManager from '../../managers/buffer_manager'
 
 const emit = defineEmits(['doToggle', 'submit'])
 const props = defineProps({
@@ -51,6 +51,10 @@ const submit = () => {
   transform: translateX(0px);
 
   transition: all 0.3s;
+}
+
+.inp:invalid {
+    background-color: red;
 }
 
 .slide-fade-leave-active {

@@ -11,7 +11,7 @@
 
     <SearchBarVue />
 
-    <div class="relative z-10 w-1/6 grid grid-cols-1 mt-10">
+    <div class="relative z-10 ml-2 w-1/6 grid grid-cols-1 mt-10">
       <CategoryItem
         v-for="item in repo.all()"
         :key="item.id"
@@ -23,14 +23,14 @@
 </template>
 
 <script setup lang="ts">
-import InputSlideBar from '../components/InputSlideBar.vue'
+import InputSlideBar from '../components/input/InputSlideBar.vue'
 import 'primeicons/primeicons.css'
 import category from '../models/category'
 import { useRepo } from 'pinia-orm'
 import { watch } from 'vue'
 import { ref } from 'vue'
-import SearchBarVue from '@/components/SearchBar.vue'
-import CategoryItem from '../components/CategoryItem.vue'
+import SearchBarVue from '@/components/input/SearchBar.vue'
+import CategoryItem from '../components/items/CategoryItem.vue'
 import { useRouter } from 'vue-router'
 import CategoryManager from '@/managers/category_manager'
 import BufferManager from '@/managers/buffer_manager'

@@ -5,12 +5,6 @@ import ApiUtils from '@/utils/api_utils'
 import { HttpMethod } from '@/enums/http_method'
 import BaseApiResponse from '@/response/base_api_response'
 
-function convertAxiosResponse<T>(response: AxiosResponse<T>): BaseApiResponse<T> {
-  return {
-    data: response.data,
-    status: response.status
-  }
-}
 export default class AxiosApi implements BaseApi {
   private axiosInstance
 

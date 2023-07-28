@@ -16,20 +16,21 @@
         <MyInputText v-model="author" :placeholder="'Author'" />
       </div>
     </div>
-    <MyButton class="mt-96" @click="onSave()" :text="'Save'"></MyButton>
+    <MyButton class="mt-24" @click="onSave()" :text="'Save'"></MyButton>
+
   </div>
 </template>
 <script setup lang="ts">
 import Button from 'primevue/button'
-import MyButton from '@/components/MyButton.vue'
-import MyInputText from '@/components/MyInputText.vue'
+import MyButton from '@/components/buttons/MyButton.vue'
+import MyInputText from '@/components/input/MyInputText.vue'
 import 'primeicons/primeicons.css'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import CategoryManager from '@/managers/category_manager'
 import BookManager from '@/managers/book_manager'
 import Category from '@/models/category'
-import UploadFile from '@/components/UploadFile.vue'
+import UploadFile from '@/components/input/UploadFile.vue'
 import FileUtils from '../utils/file_utils'
 
 const props = defineProps({

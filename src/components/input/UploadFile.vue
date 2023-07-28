@@ -16,7 +16,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import IconDropFIle from './icons/IconDropFIle.vue'
+import IconDropFIle from '../icons/IconDropFIle.vue'
 
 defineEmits(['upload'])
 </script>

@@ -22,9 +22,9 @@
 <script setup lang="ts">
 import Button from 'primevue/button'
 import Book from '@/models/book'
-import IconFeather from '../components/icons/IconFeather.vue'
-import IconStyle from '../components/icons/IconStyle.vue'
-import IconBook from '../components/icons/IconBook.vue'
+import IconFeather from '../icons/IconFeather.vue'
+import IconStyle from '../icons/IconStyle.vue'
+import IconBook from '../icons/IconBook.vue'
 defineProps({
   item: {
     type: Book,
