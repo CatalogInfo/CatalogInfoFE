@@ -8,9 +8,9 @@ import BaseApiResponse from '@/response/base_api_response'
 export default class AxiosApi implements BaseApi {
   private axiosInstance
 
-  constructor() {
+  constructor(baseUrl: string) {
     this.axiosInstance = axios.create({
-      baseURL: 'https://www.googleapis.com/youtube/v3'
+      baseURL: baseUrl,
     })
 
     applyCaseMiddleware(this.axiosInstance)
@@ -38,6 +38,9 @@ export default class AxiosApi implements BaseApi {
     data?: D
   ): Promise<BaseApiResponse<T>> {
     return await this.axiosInstance.request({
+      headers: { 
+        'Content-Type' : 'application/json',
+      },
       method: ApiUtils.httpMethodToString(method),
       url: url,
       data: data

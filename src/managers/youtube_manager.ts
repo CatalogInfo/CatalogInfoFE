@@ -2,6 +2,7 @@ import BaseApiResponse from '@/response/base_api_response'
 import api_factory from '@/api/api_factory'
 
 export default class YoutubeManager {
+  static baseURL = 'https://www.googleapis.com/youtube/v3';
   static api_key: string = 'AIzaSyDpVzijXYtuFgFK4-HsLmSkrBSDGfuBvpE'
 
   private static getIdFromLink(link: string): string {
@@ -16,7 +17,7 @@ export default class YoutubeManager {
     const url: string =
       '/videos?part=id%2C+snippet&id=' + this.getIdFromLink(link) + '&key=' + this.api_key
 
-    const response: BaseApiResponse<string> = await api_factory.getInstance().get<string>(url)
+    const response: BaseApiResponse<string> = await api_factory.getInstance(this.baseURL).get<string>(url)
 
     const data = JSON.parse(JSON.stringify(response.data))
 

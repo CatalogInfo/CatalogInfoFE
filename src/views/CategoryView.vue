@@ -57,7 +57,7 @@ import TabView from 'primevue/tabview'
 import 'primeicons/primeicons.css'
 import TabPanel from 'primevue/tabpanel'
 import AddButton from '@/components/buttons/AddButton.vue'
-import { ref, computed } from 'vue'
+import { ref, computed, onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
 import BookManager from '../managers/book_manager'
 import InputSlideBar from '../components/input/InputSlideBar.vue'
@@ -75,21 +75,27 @@ const props = defineProps({
   }
 })
 
+onBeforeMount(() => {
+  BookManager.loadAll(Number(props.id));
+})
+
+const id = Number(props.id);
+
 const router = useRouter()
 
 const active = ref(0)
 const link = ref('')
 const toggle = ref(false)
 
-const books = ref(computed(() => BookManager.getBooksByCategory(props.id)))
-const videos = ref(computed(() => VideoManager.getVideoByCategory(props.id)))
+const books = ref(computed(() => BookManager.getBooksByCategory(id)))
+const videos = ref(computed(() => VideoManager.getVideoByCategory(id)))
 
 const doToggle = () => {
   toggle.value = !toggle.value
 }
 
 const submit = async () => {
-  const category = CategoryManager.getCategoryById(props.id) as Category
+  const category = CategoryManager.getCategoryById(id) as Category
   const linkString: string = BufferManager.get()?.value as string
 
   await VideoManager.createVideo(linkString, category)
@@ -103,11 +109,11 @@ const getActive = () => {
   return active.value
 }
 
-const goToBook = (id: string) => {
-  router.push('/categories/' + props.id + '/book/' + id)
+const goToBook = (id: number) => {
+  router.push('/categories/' + props.id + '/book/' + id.toString())
 }
 
 const createBook = () => {
-  router.push('/categories/' + props.id + '/book')
+  router.push(`/categories/${id}/book`)
 }
 </script>

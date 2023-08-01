@@ -6,7 +6,7 @@ export default class Video extends Model {
 
   static fields() {
     return {
-      id: this.uid(10),
+      id: this.number(0),
       category: this.belongsTo(Category, 'categoryId'),
       link: this.string(''),
       title: this.string(''),
@@ -14,7 +14,7 @@ export default class Video extends Model {
     }
   }
 
-  declare id: string
+  declare id: number
   declare category: Category
   declare link: string
   declare title: string

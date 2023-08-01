@@ -3,17 +3,17 @@
     id="itemBut"
     class="text-center bg-black rounded-lg p-8 text-white shadow-xl font-bold text-xl"
   >
-    {{ item.category.toUpperCase() }}
+    {{ item.name.toUpperCase() }}
   </Button>
 </template>
 
 <script setup lang="ts">
-import category from '../../models/category'
+import Category from '../../models/category'
 import Button from 'primevue/button'
 
 defineProps({
   item: {
-    type: category,
+    type: Category,
     required: true
   }
 })

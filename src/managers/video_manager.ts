@@ -13,11 +13,11 @@ export default class VideoManager {
     return this.repository.all()
   }
 
-  static getVideoById(id: string): Video | null {
+  static getVideoById(id: number): Video | null {
     return this.repository.find(id)
   }
 
-  static getVideoByCategory(categoryId: string): Video[] | null {
+  static getVideoByCategory(categoryId: number): Video[] | null {
     const videos = this.repository
       .where('category', (value: Category) => {
         return value.id === categoryId

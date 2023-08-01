@@ -39,6 +39,8 @@ const props = defineProps({
   }
 })
 
+const id = Number(props.id);
+
 const router = useRouter()
 
 const fileVal = ref('')
@@ -46,14 +48,16 @@ const name = ref('')
 const style = ref('')
 const author = ref('')
 
-const onSave = () => {
-  const cat = CategoryManager.getCategoryById(props.id) as Category
-  BookManager.createBook({
+const onSave = async () => {
+  console.log(typeof props.id)
+  const cat: Category = CategoryManager.getCategoryById(id) as Category
+
+  console.log(props.id + " " + JSON.stringify(cat))
+  await BookManager.createBook({
     category: cat,
     name: name.value,
     style: style.value,
     text: fileVal.value,
-    description: '',
     author: author.value
   })
   back()

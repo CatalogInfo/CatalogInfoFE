@@ -7,15 +7,15 @@ export default class Category extends Model {
 
   static fields() {
     return {
-      id: this.uid(10),
-      category: this.attr(0),
+      id: this.attr(null),
       books: this.hasMany(Book, 'categoryId'),
+      name: this.string(''),
       videos: this.hasMany(Video, 'categoryId')
     }
   }
 
-  declare id: string
-  declare category: string
+  declare id: number
   declare books: Book[]
+  declare name: string
   declare videos: Video[]
 }
