@@ -1,5 +1,5 @@
 import Buffer from '@/models/buffer'
-import { Collection, useRepo } from 'pinia-orm'
+import { useRepo } from 'pinia-orm'
 import store from '../store/store'
 
 export default class BufferManager {

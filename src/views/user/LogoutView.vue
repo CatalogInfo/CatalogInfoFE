@@ -1,12 +1,12 @@
 <template>
   <div class="mt-5 flex w-full flex-row justify-center">
-    <SubmitButton class="p-3" @click="tryLogout">Logout</SubmitButton>
+    <MyButton class="p-3" @click="tryLogout" :text="'logout'"/>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import AuthManager from "@/managers/auth_manager";
-import SubmitButton from "@/components/common/SubmitButton.vue";
+import MyButton from "../../components/buttons/MyButton.vue";
 
 const tryLogout = 
    () => {

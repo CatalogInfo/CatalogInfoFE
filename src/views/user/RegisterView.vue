@@ -1,46 +1,35 @@
 <template>
   <div class="relative flex h-full flex-col items-center justify-center">
-    <AuthForm>
-      <InputField
+      <MyInputText
         v-model="credentials.username"
         type="text"
         placeholder="Username"
       />
-      <InputField
+      <MyInputText
         v-model="credentials.email"
         type="email"
         placeholder="Email"
       />
-      <InputField
+      <MyInputText
         v-model="credentials.password"
         type="password"
         placeholder="Password"
       />
-      <InputField
+      <MyInputText
         v-model="credentials.repeatedPassword"
         type="password"
         placeholder="Repeat password"
       />
-      <SubmitButton @click="tryRegister"> Register </SubmitButton>
-      <template #footer>
-        <span class="text-gray-600">
-          Already have an account?
-          <InternalLink path="/auth/login"> Login </InternalLink>
-        </span>
-      </template>
-    </AuthForm>
+      <MyButton @click="tryRegister" :text="'register'"/>
   </div>
 </template>
 
 <script setup>
 import { reactive } from "vue";
-import InputField from "@/components/common/InputField.vue";
-import InternalLink from "@/components/common/InternalLink.vue";
-import SubmitButton from "@/components/common/SubmitButton.vue";
-import AuthForm from "@/components/auth/AuthForm.vue";
-import AuthManager from "@/managers/authManager";
-import { showToast } from "@/decorators/toastDecorators";
 
+import AuthManager from "@/managers/auth_manager";
+import MyInputText from "../../components/input/MyInputText.vue"
+import MyButton from "../../components/buttons/MyButton.vue";
 const credentials = reactive({
   username: "",
   email: "",
@@ -48,9 +37,7 @@ const credentials = reactive({
   repeatedPassword: "",
 });
 
-const tryRegister = showToast(
-  { messageOnSuccess: "Registered successfully" },
-  async function () {
+const tryRegister = async () => {
     if (
       !credentials.password ||
       credentials.password !== credentials.repeatedPassword
@@ -64,5 +51,4 @@ const tryRegister = showToast(
       credentials.password
     );
   }
-);
 </script>

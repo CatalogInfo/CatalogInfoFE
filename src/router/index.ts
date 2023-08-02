@@ -7,10 +7,36 @@ import BookView from '../views/BookView.vue'
 import MyCategoriesViewVue from '../views/MyCategoriesView.vue'
 import CategoryManager from '@/managers/category_manager'
 import AuthManager from "../managers/auth_manager"
+import LoginView from "../views/user/LoginView.vue"
+import LogoutView from "../views/user/LogoutView.vue"
+import RegisterView from "../views/user/RegisterView.vue"
+
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: "/auth",
+      name: "auth",
+      children: [
+        {
+          path: "login",
+          name: "login",
+          component: LoginView,
+        },
+        {
+          path: "logout",
+          name: "logout",
+          component: LogoutView,
+        },
+        {
+          path: "register",
+          name: "register",
+          component: RegisterView,
+        },
+      ],
+    },
     {
       path: '/',
       name: 'home',
@@ -41,12 +67,17 @@ const router = createRouter({
     }
   ]
 })
-router.beforeEach(async (to, from, next) => {
-  await CategoryManager.loadAll();
-  if (!(await AuthManager.isTokenValid())) {
-    next({ name: "login" });
-  } else {
-    next();
+router.beforeEach(async (to, from) => {
+  // await CategoryManager.loadAll();
+  if (
+    // make sure the user is authenticated
+    !(await AuthManager.isTokenValid()) &&
+    // ❗️ Avoid an infinite redirect
+    to.name !== 'login'
+  ) {
+    // redirect the user to the login page
+    return { name: 'login' }
   }
 })
+
 export default router

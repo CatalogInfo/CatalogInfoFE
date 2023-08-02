@@ -53,13 +53,13 @@ export default class BookManager {
     return books.map(this.getFormatedBook);
   }
 
-  static saveCategoryToBook(category: any, id: Number) {
-    const category: Category = this.getCategoryById(Number(id)) as Category;
-    const books = BookManager.getBooksByCategory(category.id);
-    const name = category.name;
+  // static saveCategoryToBook(category: any, id: Number) {
+  //   const category1: Category = this.getCategoryById(Number(id)) as Category;
+  //   const books = BookManager.getBooksByCategory(category.id);
+  //   const name = category.name;
 
-    this.repository.save({id: id, books: books, name: name});
-  }
+  //   this.repository.save({id: id, books: books, name: name});
+  // }
 
   static getFormatedBook(book: BookResponse) {
     const category = CategoryManager.getCategoryById(book.category) as Category

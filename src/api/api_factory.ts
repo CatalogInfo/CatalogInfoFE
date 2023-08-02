@@ -1,9 +1,10 @@
 import BaseApi from './base_api'
 import AxiosApi from './axios_api'
+import ApiOptions from './api_options'
 
 class ApiFactory {
-  getInstance(baseUrl: string): BaseApi {
-    return new AxiosApi(baseUrl)
+  getInstance(apiOptions: ApiOptions | undefined = undefined): BaseApi {
+    return new AxiosApi(apiOptions)
   }
 }
 

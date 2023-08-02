@@ -1,4 +1,4 @@
 export default interface BaseApiResponse<T> {
-  data: string
+  data: T
   status: number
 }

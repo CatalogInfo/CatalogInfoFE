@@ -35,7 +35,6 @@ export default class AuthManager {
     this.setToken(token);
 
     //! to remove
-    await this.loadEverything();
   }
 
   static async loadEverything() {

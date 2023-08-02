@@ -1,34 +1,28 @@
 <template>
   <div class="relative flex h-full flex-col items-center justify-center">
-    <AuthForm>
-      <InputField
+      <MyInputText
         v-model="credentials.username"
         type="text"
         placeholder="Username"
       />
-      <InputField
+      <MyInputText
         v-model="credentials.password"
         type="password"
         placeholder="Password"
       />
-      <SubmitButton @click="tryLogin"> Login </SubmitButton>
-      <template #footer>
-        <InternalLink path="#forgot"> Forgot password? </InternalLink>
+      <MyButton @click="tryLogin" :text="'login'"></MyButton>
         <span class="text-gray-600">
           No account?
-          <InternalLink path="/auth/register"> Register </InternalLink>
+          <a href="/auth/register"> Register </a>
         </span>
-      </template>
-    </AuthForm>
+      
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { reactive } from "vue";
-import InputField from "@/components/common/InputField.vue";
-import InternalLink from "@/components/common/InternalLink.vue";
-import SubmitButton from "@/components/common/SubmitButton.vue";
-import AuthForm from "@/components/auth/AuthForm.vue";
+import MyInputText from "../../components/input/MyInputText.vue"
+import MyButton from "../../components/buttons/MyButton.vue";
 import AuthManager from "@/managers/auth_manager";
 import { useRouter } from "vue-router";
 
