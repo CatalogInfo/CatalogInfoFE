@@ -13,7 +13,7 @@ const items = ref([
   {
     label: 'Categories',
     icon: 'pi pi-th-large',
-    to: '/create'
+    to: '/categories'
   }
 ])
 </script>

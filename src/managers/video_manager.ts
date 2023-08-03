@@ -31,6 +31,7 @@ export default class VideoManager {
       const info: VideoApiInfo = await YoutubeManager.getInfoFromLink(link)
 
       this.repository.save({
+        id: info.id,
         link: link,
         category: category,
         title: info.title,

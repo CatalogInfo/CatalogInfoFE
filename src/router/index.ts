@@ -11,8 +11,6 @@ import LoginView from "../views/user/LoginView.vue"
 import LogoutView from "../views/user/LogoutView.vue"
 import RegisterView from "../views/user/RegisterView.vue"
 
-
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -44,7 +42,7 @@ const router = createRouter({
     },
     {
       path: '/categories/:id',
-      name: 'categories',
+      name: 'category',
       component: CategoryView,
       props: true,
     },
@@ -61,21 +59,18 @@ const router = createRouter({
       props: true,
     },
     {
-      path: '/create',
-      name: 'about',
+      path: '/categories',
+      name: 'categories',
       component: MyCategoriesViewVue
     }
   ]
 })
 router.beforeEach(async (to, from) => {
-  // await CategoryManager.loadAll();
+  await CategoryManager.loadAll();
   if (
-    // make sure the user is authenticated
     !(await AuthManager.isTokenValid()) &&
-    // ❗️ Avoid an infinite redirect
     to.name !== 'login'
   ) {
-    // redirect the user to the login page
     return { name: 'login' }
   }
 })

@@ -9,6 +9,7 @@ export default class Book extends Model {
       id: this.attr(null),
       category: this.belongsTo(Category, 'categoryId'),
       name: this.string(''),
+      categoryId: this.attr(null),
       style: this.string(''),
       text: this.string(''),
       author: this.string('')
@@ -20,5 +21,6 @@ export default class Book extends Model {
   declare name: string
   declare style: string
   declare text: string
+  declare categoryId: number
   declare author: string
 }

@@ -1,13 +1,10 @@
 import CategoryApi from '@/api/category_api'
-import BookResponse from '@/dtos/book_response'
 import CategoryResponse from '@/dtos/category_response'
-import Book from '@/models/book'
 import Category from '@/models/category'
 import BaseApiResponse from '@/response/base_api_response'
-import { faCommentsDollar } from '@fortawesome/free-solid-svg-icons'
 import { useRepo } from 'pinia-orm'
 import store from '../store/store'
-import BookManager from './book_manager'
+import UserApi from "../api/user_api";
 
 export default class CategoryManager {
   protected static get repository() {
@@ -18,18 +15,11 @@ export default class CategoryManager {
     return this.repository.withAllRecursive().all()
   }
 
-  static saveBookToCategory(book: any, id: Number) {
-    const category: Category = this.getCategoryById(Number(id)) as Category;
-    const books = BookManager.getBooksByCategory(category.id);
-    const name = category.name;
-
-    this.repository.save({id: id, books: books, name: name});
-  }
-
   static async loadAll() {
-    const response: BaseApiResponse<CategoryResponse> = await CategoryApi.getCategories();
+    const response: BaseApiResponse<CategoryResponse> = await UserApi.getCategories();
     const category = JSON.stringify(response.data);
     const categories: Array<CategoryResponse> = JSON.parse(category);
+    console.log(categories);
 
     this.repository.save(this.getFormatedCategories(categories))
   }
@@ -42,6 +32,7 @@ export default class CategoryManager {
     return {
       id: category.id,
       name: category.name,
+      books: category.books.map(bookId => { return{ id: bookId } }),
     };
   }
 

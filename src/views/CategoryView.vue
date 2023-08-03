@@ -76,7 +76,8 @@ const props = defineProps({
 })
 
 onBeforeMount(() => {
-  BookManager.loadAll(Number(props.id));
+  // BookManager.loadAll(Number(props.id));
+  
 })
 
 const id = Number(props.id);
@@ -87,7 +88,9 @@ const active = ref(0)
 const link = ref('')
 const toggle = ref(false)
 
-const books = ref(computed(() => BookManager.getBooksByCategory(id)))
+const category = computed(() => CategoryManager.getCategoryById(id));
+
+const books = ref(computed(() => category.value?.books))
 const videos = ref(computed(() => VideoManager.getVideoByCategory(id)))
 
 const doToggle = () => {
@@ -97,6 +100,7 @@ const doToggle = () => {
 const submit = async () => {
   const category = CategoryManager.getCategoryById(id) as Category
   const linkString: string = BufferManager.get()?.value as string
+  console.log(books.value);
 
   await VideoManager.createVideo(linkString, category)
 

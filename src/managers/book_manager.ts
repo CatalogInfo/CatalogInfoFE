@@ -1,4 +1,5 @@
 import BookApi from '@/api/book_api'
+import CategoryApi from '@/api/category_api'
 import BookData from '@/data/book_data'
 import BookResponse from '@/dtos/book_response'
 import Book from '@/models/book'
@@ -17,8 +18,8 @@ export default class BookManager {
     return this.repository.all()
   }
 
-  static async loadAll(id: number) {
-    const response: BaseApiResponse<BookResponse> = await BookApi.getBooks(id);
+  static async loadAll(categoryId: number) {
+    const response: BaseApiResponse<BookResponse> = await CategoryApi.getBooks(categoryId) as BaseApiResponse<BookResponse>;
     const books: Array<BookResponse> = JSON.parse(JSON.stringify(response.data));
 
     console.log(books);
@@ -29,22 +30,19 @@ export default class BookManager {
     return this.repository.find(id)
   }
 
-  static getBooksByCategory(categoryId: number): Book[] | null {
-    console.log(this.repository.all())
-    const books = this.repository
-      .where('category', (value: Category) => {
-        return value.id === categoryId
-      })
-      .get()
-      console.log(books);
-    return books
-  }
+  // static async getBooksByCategory(categoryId: number): Book[] | null {
+  //   const response: BaseApiResponse<BookResponse> = await CategoryApi.getBooks(categoryId);
+  //   const books: Array<BookResponse> = JSON.parse(JSON.stringify(response.data));
+
+  //   console.log(books);
+  //   this.repository.save(this.getFormatedBooks(books));
+  //   return books
+  // }
 
   static async createBook(book: any) {
-    const response = await BookApi.createBook(book);
+    const response = await CategoryApi.createBook(book);
     const bookRes: BookResponse = JSON.parse(JSON.stringify(response.data));
     const der = this.getFormatedBook(bookRes);
-    CategoryManager.saveBookToCategory(this.getFormatedBook(bookRes), bookRes.category);
 
     this.repository.save(der);
   }
@@ -62,11 +60,10 @@ export default class BookManager {
   // }
 
   static getFormatedBook(book: BookResponse) {
-    const category = CategoryManager.getCategoryById(book.category) as Category
+    // const category = CategoryManager.getCategoryById(book.category) as Category
     return {
       id: book.id,
       name: book.name,
-      category: category,
       author: book.author,
       style: book.style,
       text: book.text,
