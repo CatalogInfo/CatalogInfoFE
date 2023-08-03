@@ -2,6 +2,8 @@ import CategoryView from '@/views/CategoryView.vue'
 
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import MainView from '../views/MainView.vue'
+
 import CreateBookView from '../views/CreateBookView.vue'
 import BookView from '../views/BookView.vue'
 import MyCategoriesViewVue from '../views/MyCategoriesView.vue'
@@ -38,40 +40,41 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: MainView,
+      children: [
+        {
+          path: '/categories/:id',
+          name: 'category',
+          component: CategoryView,
+          props: true,
+        },
+        {
+          path: '/categories/:id/book',
+          name: 'createBook',
+          component: CreateBookView,
+          props: true,
+        },
+        {
+          path: '/categories/:id/book/:bookId',
+          name: 'bookView',
+          component: BookView,
+          props: true,
+        },
+        {
+          path: '/categories',
+          name: 'categories',
+          component: MyCategoriesViewVue
+        }
+      ]
     },
-    {
-      path: '/categories/:id',
-      name: 'category',
-      component: CategoryView,
-      props: true,
-    },
-    {
-      path: '/categories/:id/book',
-      name: 'createBook',
-      component: CreateBookView,
-      props: true,
-    },
-    {
-      path: '/categories/:id/book/:bookId',
-      name: 'bookView',
-      component: BookView,
-      props: true,
-    },
-    {
-      path: '/categories',
-      name: 'categories',
-      component: MyCategoriesViewVue
-    }
   ]
 })
 router.beforeEach(async (to, from) => {
-  await CategoryManager.loadAll();
   if (
     !(await AuthManager.isTokenValid()) &&
-    to.name !== 'login'
+    to.path !== '/auth/login'
   ) {
-    return { name: 'login' }
+    // return { name: 'login' }
   }
 })
 

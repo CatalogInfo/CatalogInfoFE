@@ -1,11 +1,11 @@
 import BaseApi from './base_api'
 import axios, { AxiosError, AxiosResponse } from 'axios'
-import applyCaseMiddleware from 'axios-case-converter'
 import ApiUtils from '@/utils/api_utils'
 import { HttpMethod } from '@/enums/http_method'
 import BaseApiResponse from '@/response/base_api_response'
 import AuthManager from '@/managers/auth_manager'
 import ApiOptions, { defaultApiOptions } from "./api_options";
+import { camelizeKeys, decamelizeKeys } from 'humps';
 
 function convertAxiosResponse<T>(response: AxiosResponse<T>): BaseApiResponse<T> {
   return {
@@ -25,7 +25,6 @@ export default class AxiosApi implements BaseApi {
       baseURL: apiOptions.baseUrl,
     });
 
-    applyCaseMiddleware(this.axiosInstance);
   }
 
   async get<T>(url: string): Promise<BaseApiResponse<T>> {
@@ -33,6 +32,7 @@ export default class AxiosApi implements BaseApi {
   }
 
   async post<T, D>(url: string, data: D): Promise<BaseApiResponse<T>> {
+    console.log(data);
     return this.genericRequest(HttpMethod.POST, url, data)
   }
 

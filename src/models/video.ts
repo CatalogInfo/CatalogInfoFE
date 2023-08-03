@@ -10,13 +10,15 @@ export default class Video extends Model {
       category: this.belongsTo(Category, 'categoryId'),
       link: this.string(''),
       title: this.string(''),
+      categoryId: this.attr(null),
       channelTitle: this.string('')
     }
   }
 
-  declare id: number
+  declare id: string
   declare category: Category
   declare link: string
   declare title: string
+  declare categoryId: number
   declare channelTitle: string
 }

@@ -67,6 +67,7 @@ import VideoItem from '@/components/items/VideoItem.vue'
 import BufferManager from '@/managers/buffer_manager'
 import Category from '@/models/category'
 import CategoryManager from '@/managers/category_manager'
+import Book from '@/models/book'
 
 const props = defineProps({
   id: {
@@ -75,9 +76,11 @@ const props = defineProps({
   }
 })
 
-onBeforeMount(() => {
-  // BookManager.loadAll(Number(props.id));
-  
+onBeforeMount(async () => {
+  // await BookManager.loadAll(Number(props.id));
+  // await VideoManager.loadAll(Number(props.id));
+  // console.log(BookManager.all());
+  // console.log(VideoManager.all());
 })
 
 const id = Number(props.id);
@@ -91,7 +94,7 @@ const toggle = ref(false)
 const category = computed(() => CategoryManager.getCategoryById(id));
 
 const books = ref(computed(() => category.value?.books))
-const videos = ref(computed(() => VideoManager.getVideoByCategory(id)))
+const videos = ref(computed(() => category.value?.videos))
 
 const doToggle = () => {
   toggle.value = !toggle.value
@@ -114,6 +117,7 @@ const getActive = () => {
 }
 
 const goToBook = (id: number) => {
+  console.log(category);
   router.push('/categories/' + props.id + '/book/' + id.toString())
 }
 

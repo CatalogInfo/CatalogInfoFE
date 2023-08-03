@@ -1,13 +1,9 @@
-import BookApi from '@/api/book_api'
 import CategoryApi from '@/api/category_api'
-import BookData from '@/data/book_data'
 import BookResponse from '@/dtos/book_response'
 import Book from '@/models/book'
-import Category from '@/models/category'
 import BaseApiResponse from '@/response/base_api_response'
 import { Collection, useRepo } from 'pinia-orm'
 import store from '../store/store'
-import CategoryManager from './category_manager'
 
 export default class BookManager {
   protected static get repository() {

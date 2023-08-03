@@ -1,4 +1,5 @@
 import authApi from "@/api/auth_api";
+import CategoryManager from "./category_manager";
 // import EventManager from "./eventManager";
 // import GroupManager from "./groupManager";
 // import UserManager from "./userManager";
@@ -35,6 +36,8 @@ export default class AuthManager {
     this.setToken(token);
 
     //! to remove
+    await CategoryManager.loadAll();
+
   }
 
   static async loadEverything() {

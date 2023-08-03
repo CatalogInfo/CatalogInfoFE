@@ -24,7 +24,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { reactive } from "vue";
 
 import AuthManager from "@/managers/auth_manager";
