@@ -49,10 +49,6 @@ const style = ref('')
 const author = ref('')
 
 const onSave = async () => {
-  console.log(typeof props.id)
-  const cat: Category = CategoryManager.getCategoryById(id) as Category
-
-  console.log(props.id + ' ' + JSON.stringify(cat))
   await BookManager.createBook(
     {
       name: name.value,

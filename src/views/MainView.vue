@@ -25,5 +25,6 @@ const items = ref([
     to: '/categories'
   }
 ])
+
 await CategoryManager.loadAll()
 </script>

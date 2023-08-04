@@ -6,6 +6,7 @@ import YoutubeManager from '@/managers/youtube_manager'
 import VideoResponse from '../dtos/responses/video_response'
 import CategoryApi from '@/api/category_api'
 import BaseApiResponse from '@/response/base_api_response'
+import CategoryManager from './category_manager'
 
 export default class VideoManager {
   protected static get repository() {
@@ -26,7 +27,6 @@ export default class VideoManager {
     )) as BaseApiResponse<VideoResponse>
     const videos: Array<VideoResponse> = JSON.parse(JSON.stringify(response.data))
 
-    console.log(videos)
     this.repository.save(this.getFormatedVideos(videos))
   }
 
@@ -67,6 +67,7 @@ export default class VideoManager {
       const videoEntity = this.getFormatedVideo(videoRes.data)
 
       this.repository.save(videoEntity)
+      await CategoryManager.loadAll();
     }
   }
 }

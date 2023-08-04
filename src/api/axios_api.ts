@@ -31,7 +31,6 @@ export default class AxiosApi implements BaseApi {
   }
 
   async post<T, D>(url: string, data: D): Promise<BaseApiResponse<T>> {
-    console.log(data)
     return this.genericRequest(HttpMethod.POST, url, data)
   }
 

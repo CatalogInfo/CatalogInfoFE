@@ -37,10 +37,9 @@ import Category from '@/models/category'
 import CategoryRequest from '@/dtos/requests/category_request'
 
 const router = useRouter()
-const categories = ref(computed(() => CategoryManager.all() as Category[]))
-
 const categoryString = ref('')
 const toggle = ref(false)
+const categories = ref(computed(() => CategoryManager.all() as Category[]))
 
 const doToggle = () => {
   toggle.value = !toggle.value
@@ -53,6 +52,7 @@ const goToGategoryView = (item: Category) => {
 const submit = async () => {
   const categoryRequest: CategoryRequest = { name: BufferManager.get()?.value as string }
   await CategoryManager.createCategory(categoryRequest)
+
   if (BufferManager.get()?.value != '') {
     doToggle()
     categoryString.value = ''

@@ -4,6 +4,7 @@ import BookResponse from '@/dtos/responses/book_response'
 import Book from '@/models/book'
 import { Collection, useRepo } from 'pinia-orm'
 import store from '../store/store'
+import CategoryManager from './category_manager'
 
 export default class BookManager {
   protected static get repository() {
@@ -30,6 +31,7 @@ export default class BookManager {
     const bookEntity = this.getFormatedBook(response.data)
 
     this.repository.save(bookEntity)
+    await CategoryManager.loadAll();
   }
 
   private static getFormatedBooks(books: Array<BookResponse>) {

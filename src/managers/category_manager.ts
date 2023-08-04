@@ -33,6 +33,7 @@ export default class CategoryManager {
     const category = response.data
 
     this.repository.save({ id: category.id, name })
+    await CategoryManager.loadAll();
   }
 
   private static async loadAllCategoryRelationships(categoryId: number) {
