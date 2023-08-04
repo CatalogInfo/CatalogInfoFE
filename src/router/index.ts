@@ -6,7 +6,6 @@ import BookView from '../views/BookView.vue'
 import MyCategoriesViewVue from '../views/MyCategoriesView.vue'
 import AuthManager from '../managers/auth_manager'
 import LoginView from '../views/user/LoginView.vue'
-import LogoutView from '../views/user/LogoutView.vue'
 import propsParser from 'vue-router-parse-props'
 import RegisterView from '../views/user/RegisterView.vue'
 
@@ -21,11 +20,6 @@ const router = createRouter({
           path: 'login',
           name: 'login',
           component: LoginView
-        },
-        {
-          path: 'logout',
-          name: 'logout',
-          component: LogoutView
         },
         {
           path: 'register',

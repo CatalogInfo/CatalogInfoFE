@@ -19,6 +19,7 @@ import CategoryManager from '@/managers/category_manager'
 import AuthManager from '@/managers/auth_manager'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import ToastManager from '@/managers/toast_manager'
 
 const router = useRouter()
 
@@ -38,6 +39,7 @@ const items = ref([
 
 const logout = () => {
   AuthManager.logout();
+  ToastManager.showSuccessToast('Logout');
   router.push("/auth/login");
 }
 

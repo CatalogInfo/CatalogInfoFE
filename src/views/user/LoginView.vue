@@ -18,6 +18,7 @@ import MyInputText from '../../components/input/MyInputText.vue'
 import MyButton from '../../components/buttons/MyButton.vue'
 import AuthManager from '@/managers/auth_manager'
 import { useRouter } from 'vue-router'
+import ToastManager from '@/managers/toast_manager'
 
 const router = useRouter()
 
@@ -27,7 +28,13 @@ const credentials = reactive({
 })
 
 const tryLogin = async () => {
-  await AuthManager.login(credentials.username, credentials.password)
+  try{
+    await AuthManager.login(credentials.username, credentials.password)
+  } catch (e) {
+    ToastManager.showErrorToast(e);
+    return;
+  }
+  ToastManager.showSuccessToast("Logged in!");
 
   router.push('/')
 }

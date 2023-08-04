@@ -7,6 +7,7 @@
 </template>
 <script setup lang="ts">
 import BookManager from '@/managers/book_manager'
+import ToastManager from '@/managers/toast_manager';
 import Book from '@/models/book'
 
 const props = defineProps({

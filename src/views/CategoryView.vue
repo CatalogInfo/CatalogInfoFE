@@ -56,7 +56,6 @@
 import TabView from 'primevue/tabview'
 import 'primeicons/primeicons.css'
 import TabPanel from 'primevue/tabpanel'
-import AddButton from '@/components/buttons/AddButton.vue'
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import InputSlideBar from '@/components/input/InputSlideBar.vue'

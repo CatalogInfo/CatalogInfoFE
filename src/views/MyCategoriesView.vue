@@ -35,6 +35,7 @@ import CategoryManager from '@/managers/category_manager'
 import BufferManager from '@/managers/buffer_manager'
 import Category from '@/models/category'
 import CategoryRequest from '@/dtos/requests/category_request'
+import ToastManager from '@/managers/toast_manager'
 
 const router = useRouter()
 const categoryString = ref('')

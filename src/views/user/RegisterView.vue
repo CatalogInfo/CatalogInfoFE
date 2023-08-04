@@ -22,6 +22,7 @@ import { reactive } from 'vue'
 import AuthManager from '@/managers/auth_manager'
 import MyInputText from '../../components/input/MyInputText.vue'
 import MyButton from '../../components/buttons/MyButton.vue'
+import ToastManager from '@/managers/toast_manager'
 const credentials = reactive({
   username: '',
   email: '',
@@ -31,6 +32,8 @@ const credentials = reactive({
 
 const tryRegister = async () => {
   if (!credentials.password || credentials.password !== credentials.repeatedPassword) {
+    ToastManager.showErrorToast("Passwords aren't equal");
+
     throw new Error("Passwords aren't equal")
   }
 
