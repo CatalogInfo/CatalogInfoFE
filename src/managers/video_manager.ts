@@ -25,6 +25,7 @@ export default class VideoManager {
     const response: BaseApiResponse<VideoResponse> = (await CategoryApi.getVideos(
       categoryId
     )) as BaseApiResponse<VideoResponse>
+    console.log(response);
     const videos: Array<VideoResponse> = JSON.parse(JSON.stringify(response.data))
 
     this.repository.save(this.getFormatedVideos(videos))

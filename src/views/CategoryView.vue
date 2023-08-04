@@ -68,12 +68,10 @@ import CategoryManager from '@/managers/category_manager'
 
 const props = defineProps({
   id: {
-    type: String,
+    type: Number,
     required: true
   }
 })
-
-const id = Number(props.id)
 
 const router = useRouter()
 
@@ -81,7 +79,7 @@ const active = ref(0)
 const link = ref('')
 const toggle = ref(false)
 
-const category = computed(() => CategoryManager.getCategoryById(id))
+const category = computed(() => CategoryManager.getCategoryById(props.id))
 const books = ref(computed(() => category.value?.books))
 const videos = ref(computed(() => category.value?.videos))
 
@@ -91,7 +89,7 @@ const doToggle = () => {
 
 const submit = async () => {
   const linkString: string = String(BufferManager.get()?.value)
-  await VideoManager.createVideo(linkString, id)
+  await VideoManager.createVideo(linkString, props.id)
 
   doToggle()
   clearInput()
@@ -110,6 +108,6 @@ const goToBook = (id: number) => {
 }
 
 const createBook = () => {
-  router.push(`/categories/${id}/book`)
+  router.push(`/categories/${props.id}/book`)
 }
 </script>

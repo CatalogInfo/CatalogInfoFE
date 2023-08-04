@@ -7,7 +7,10 @@ export default class YoutubeManager {
 
   private static getIdFromLink(link: string): string {
     if (link.includes('watch?v')) {
-      return link.substring(link.indexOf('=') + 1, link.indexOf('&'))
+      if(link.includes('&')){
+        return link.substring(link.indexOf('=')+1, link.indexOf("&"))
+      }
+      return link.substring(link.indexOf('=')+1)
     }
 
     return link.substring(17)
@@ -15,6 +18,7 @@ export default class YoutubeManager {
 
   public static async getInfoFromLink(link: string): Promise<YoutubeRequest> {
     const id = this.getIdFromLink(link)
+    console.log(id)
 
     const response: BaseApiResponse<string> = await YoutubeApi.getVideoById(id, this.api_key)
 

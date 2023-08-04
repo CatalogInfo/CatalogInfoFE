@@ -16,13 +16,19 @@
 import Button from 'primevue/button'
 import Video from '@/models/video'
 import YouTube from 'vue3-youtube'
+import { onBeforeMount } from 'vue'
+import { onBeforeRouteUpdate } from 'vue-router'
 
+onBeforeRouteUpdate( async () => {
+  await new Promise(r => setTimeout(r, 2000));
+})
 defineProps({
   item: {
     type: Video,
     required: true
   }
 })
+
 </script>
 <style scoped>
 #itemBut {

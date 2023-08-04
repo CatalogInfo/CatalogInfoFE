@@ -11,17 +11,17 @@ import Book from '@/models/book'
 
 const props = defineProps({
   id: {
-    type: String,
+    type: Number,
     required: true
   },
   bookId: {
-    type: String,
+    type: Number,
     required: true
   }
 })
 
 const getText = () => {
-  const book: Book = <Book>BookManager.getBookById(Number(props.bookId))
+  const book: Book = <Book>BookManager.getBookById(props.bookId)
   return book.text
 }
 </script>
