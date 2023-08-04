@@ -6,7 +6,7 @@ export default class User extends Model {
 
   static fields() {
     return {
-      id: this.numer(null),
+      id: this.number(null),
       username: this.string(''),
       categories: this.hasMany(Category, 'categoryId')
     }

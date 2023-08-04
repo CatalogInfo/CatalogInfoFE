@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex h-full flex-col items-center justify-center">
+  <div class="mt-48 relative flex h-full flex-col items-center justify-center space-y-4">
     <MyInputText v-model="credentials.username" type="text" placeholder="Username" />
     <MyInputText v-model="credentials.email" type="email" placeholder="Email" />
     <MyInputText v-model="credentials.password" type="password" placeholder="Password" />
@@ -9,6 +9,10 @@
       placeholder="Repeat password"
     />
     <MyButton @click="tryRegister" :text="'register'" />
+    <span class="text-gray-600">
+      Already have an account?
+      <a href="/auth/login"> Login </a>
+    </span>
   </div>
 </template>
 

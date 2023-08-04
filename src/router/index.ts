@@ -65,14 +65,14 @@ const router = createRouter({
           name: 'categories',
           component: MyCategoriesViewVue
         }
-      ]
+      ],
+      beforeEnter: async (to) => {
+        if (!(await AuthManager.isTokenValid()) && to.path !== '/auth/login') {
+          return { name: 'login' }
+        }
+      }
     }
   ]
-})
-router.beforeEach(async (to, from) => {
-  if (!(await AuthManager.isTokenValid()) && to.path !== '/auth/login') {
-    // return { name: 'login' }
-  }
 })
 
 export default router
