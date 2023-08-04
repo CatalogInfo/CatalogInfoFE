@@ -1,9 +1,9 @@
 <template>
   <Button
     id="itemBut"
-    class="text-center bg-black rounded-lg p-8 text-white shadow-xl font-bold text-xl"
+    class="text-center h-24 bg-black rounded-lg p-8 shadow-xl font-bold text-3xl"
   >
-    {{ item.name.toUpperCase() }}
+    <p class="text-white text-xl">{{ item.name.toUpperCase() }}</p>
   </Button>
 </template>
 
