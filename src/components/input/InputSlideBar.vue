@@ -29,7 +29,7 @@ import BufferManager from '../../managers/buffer_manager'
 
 const emit = defineEmits(['doToggle', 'submit'])
 
-const emptyStyleColor = 'red';
+const emptyStyleColor = 'red'
 
 const props = defineProps({
   toggle: {
@@ -50,18 +50,17 @@ const props = defineProps({
   }
 })
 
+const tip = ref(props.placeholder)
 
-const tip = ref(props.placeholder);
-
-const normalInputStyle = '0px transparent';
-const emptyInputStyle = '1px solid ' + emptyStyleColor;
+const normalInputStyle = '0px transparent'
+const emptyInputStyle = '1px solid ' + emptyStyleColor
 let inputStyle = ref('0px transparent')
 
 const focusout = () => {
-  normalizeInputStyle();
+  normalizeInputStyle()
 
   if (props.toggle === true) {
-    emit('doToggle');
+    emit('doToggle')
   }
 }
 
@@ -69,24 +68,23 @@ const value = ref(props.valueString)
 
 const normalizeInputStyle = () => {
   inputStyle.value = normalInputStyle
-  tip.value = props.placeholder;
+  tip.value = props.placeholder
 }
 
 const stressInputStyle = () => {
   inputStyle.value = emptyInputStyle
-  tip.value = props.wrongInputPlaceholder;
+  tip.value = props.wrongInputPlaceholder
 }
 
 const submit = () => {
   if (value.value === '') {
     stressInputStyle()
     return
-  } 
+  }
 
   BufferManager.updateBuffer(value.value)
   emit('submit')
   value.value = ''
-  
 }
 </script>
 

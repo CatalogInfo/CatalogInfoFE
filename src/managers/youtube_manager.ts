@@ -1,8 +1,8 @@
 import BaseApiResponse from '@/response/base_api_response'
-import YoutubeApi from "../api/youtube_api";
+import YoutubeApi from '../api/youtube_api'
 
 export default class YoutubeManager {
-  static baseURL = 'https://www.googleapis.com/youtube/v3';
+  static baseURL = 'https://www.googleapis.com/youtube/v3'
   static api_key: string = 'AIzaSyDpVzijXYtuFgFK4-HsLmSkrBSDGfuBvpE'
 
   private static getIdFromLink(link: string): string {
@@ -13,9 +13,8 @@ export default class YoutubeManager {
     return link.substring(17)
   }
 
-  public static async getInfoFromLink(link: string): Promise<VideoApiInfo> {
-
-    const id = this.getIdFromLink(link);
+  public static async getInfoFromLink(link: string): Promise<YoutubeRequest> {
+    const id = this.getIdFromLink(link)
 
     const response: BaseApiResponse<string> = await YoutubeApi.getVideoById(id, this.api_key)
 

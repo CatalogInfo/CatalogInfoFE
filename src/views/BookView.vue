@@ -12,7 +12,7 @@ import Book from '@/models/book'
 const props = defineProps({
   id: {
     type: String,
-    required: true,
+    required: true
   },
   bookId: {
     type: String,

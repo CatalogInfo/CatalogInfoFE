@@ -6,7 +6,7 @@ export default class Video extends Model {
 
   static fields() {
     return {
-      id: this.string(""),
+      id: this.string(''),
       category: this.belongsTo(Category, 'categoryId'),
       link: this.string(''),
       title: this.string(''),

@@ -34,6 +34,7 @@ import { useRouter } from 'vue-router'
 import CategoryManager from '@/managers/category_manager'
 import BufferManager from '@/managers/buffer_manager'
 import Category from '@/models/category'
+import CategoryRequest from '@/dtos/requests/category_request'
 
 const router = useRouter()
 const categories = ref(computed(() => CategoryManager.all() as Category[]))
@@ -46,12 +47,12 @@ const doToggle = () => {
 }
 
 const goToGategoryView = (item: Category) => {
-
-  router.push("/categories/" + (item.id).toString());
-};
+  router.push('/categories/' + item.id.toString())
+}
 
 const submit = async () => {
-  await CategoryManager.createCategory(BufferManager.get()?.value as string)
+  const categoryRequest: CategoryRequest = { name: BufferManager.get()?.value as string }
+  await CategoryManager.createCategory(categoryRequest)
   if (BufferManager.get()?.value != '') {
     doToggle()
     categoryString.value = ''

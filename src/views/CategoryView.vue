@@ -57,17 +57,14 @@ import TabView from 'primevue/tabview'
 import 'primeicons/primeicons.css'
 import TabPanel from 'primevue/tabpanel'
 import AddButton from '@/components/buttons/AddButton.vue'
-import { ref, computed, onBeforeMount } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import BookManager from '../managers/book_manager'
 import InputSlideBar from '../components/input/InputSlideBar.vue'
 import VideoManager from '../managers/video_manager'
 import BookItem from '@/components/items/BookItem.vue'
 import VideoItem from '@/components/items/VideoItem.vue'
 import BufferManager from '@/managers/buffer_manager'
-import Category from '@/models/category'
 import CategoryManager from '@/managers/category_manager'
-import Book from '@/models/book'
 
 const props = defineProps({
   id: {
@@ -76,14 +73,7 @@ const props = defineProps({
   }
 })
 
-onBeforeMount(async () => {
-  // await BookManager.loadAll(Number(props.id));
-  // await VideoManager.loadAll(Number(props.id));
-  // console.log(BookManager.all());
-  // console.log(VideoManager.all());
-})
-
-const id = Number(props.id);
+const id = Number(props.id)
 
 const router = useRouter()
 
@@ -91,7 +81,7 @@ const active = ref(0)
 const link = ref('')
 const toggle = ref(false)
 
-const category = computed(() => CategoryManager.getCategoryById(id));
+const category = computed(() => CategoryManager.getCategoryById(id))
 
 const books = ref(computed(() => category.value?.books))
 const videos = ref(computed(() => category.value?.videos))
@@ -101,11 +91,10 @@ const doToggle = () => {
 }
 
 const submit = async () => {
-  const category = CategoryManager.getCategoryById(id) as Category
   const linkString: string = BufferManager.get()?.value as string
-  console.log(books.value);
+  console.log(books.value)
 
-  await VideoManager.createVideo(linkString, category)
+  await VideoManager.createVideo(linkString, id)
 
   doToggle()
 
@@ -117,7 +106,7 @@ const getActive = () => {
 }
 
 const goToBook = (id: number) => {
-  console.log(category);
+  console.log(category)
   router.push('/categories/' + props.id + '/book/' + id.toString())
 }
 

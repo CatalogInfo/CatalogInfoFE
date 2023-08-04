@@ -7,7 +7,7 @@ export default class Category extends Model {
 
   static fields() {
     return {
-      id: this.attr(null),
+      id: this.number(null),
       books: this.hasMany(Book, 'categoryId'),
       name: this.string(''),
       videos: this.hasMany(Video, 'categoryId')

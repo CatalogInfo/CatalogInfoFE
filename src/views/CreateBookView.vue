@@ -39,7 +39,7 @@ const props = defineProps({
   }
 })
 
-const id = Number(props.id);
+const id = Number(props.id)
 
 const router = useRouter()
 
@@ -52,14 +52,16 @@ const onSave = async () => {
   console.log(typeof props.id)
   const cat: Category = CategoryManager.getCategoryById(id) as Category
 
-  console.log(props.id + " " + JSON.stringify(cat))
-  await BookManager.createBook({
-    category: cat,
-    name: name.value,
-    style: style.value,
-    text: fileVal.value,
-    author: author.value
-  })
+  console.log(props.id + ' ' + JSON.stringify(cat))
+  await BookManager.createBook(
+    {
+      name: name.value,
+      style: style.value,
+      text: fileVal.value,
+      author: author.value
+    },
+    id
+  )
   back()
 }
 

@@ -1,4 +1,4 @@
 export default interface LoginResponse {
-    token: string;
-    tip: string;
+  token: string
+  tip: string
 }

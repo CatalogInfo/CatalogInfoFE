@@ -8,34 +8,34 @@ import CreateBookView from '../views/CreateBookView.vue'
 import BookView from '../views/BookView.vue'
 import MyCategoriesViewVue from '../views/MyCategoriesView.vue'
 import CategoryManager from '@/managers/category_manager'
-import AuthManager from "../managers/auth_manager"
-import LoginView from "../views/user/LoginView.vue"
-import LogoutView from "../views/user/LogoutView.vue"
-import RegisterView from "../views/user/RegisterView.vue"
+import AuthManager from '../managers/auth_manager'
+import LoginView from '../views/user/LoginView.vue'
+import LogoutView from '../views/user/LogoutView.vue'
+import RegisterView from '../views/user/RegisterView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/auth",
-      name: "auth",
+      path: '/auth',
+      name: 'auth',
       children: [
         {
-          path: "login",
-          name: "login",
-          component: LoginView,
+          path: 'login',
+          name: 'login',
+          component: LoginView
         },
         {
-          path: "logout",
-          name: "logout",
-          component: LogoutView,
+          path: 'logout',
+          name: 'logout',
+          component: LogoutView
         },
         {
-          path: "register",
-          name: "register",
-          component: RegisterView,
-        },
-      ],
+          path: 'register',
+          name: 'register',
+          component: RegisterView
+        }
+      ]
     },
     {
       path: '/',
@@ -46,19 +46,19 @@ const router = createRouter({
           path: '/categories/:id',
           name: 'category',
           component: CategoryView,
-          props: true,
+          props: true
         },
         {
           path: '/categories/:id/book',
           name: 'createBook',
           component: CreateBookView,
-          props: true,
+          props: true
         },
         {
           path: '/categories/:id/book/:bookId',
           name: 'bookView',
           component: BookView,
-          props: true,
+          props: true
         },
         {
           path: '/categories',
@@ -66,14 +66,11 @@ const router = createRouter({
           component: MyCategoriesViewVue
         }
       ]
-    },
+    }
   ]
 })
 router.beforeEach(async (to, from) => {
-  if (
-    !(await AuthManager.isTokenValid()) &&
-    to.path !== '/auth/login'
-  ) {
+  if (!(await AuthManager.isTokenValid()) && to.path !== '/auth/login') {
     // return { name: 'login' }
   }
 })

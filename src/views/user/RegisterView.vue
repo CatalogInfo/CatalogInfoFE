@@ -1,54 +1,35 @@
 <template>
   <div class="relative flex h-full flex-col items-center justify-center">
-      <MyInputText
-        v-model="credentials.username"
-        type="text"
-        placeholder="Username"
-      />
-      <MyInputText
-        v-model="credentials.email"
-        type="email"
-        placeholder="Email"
-      />
-      <MyInputText
-        v-model="credentials.password"
-        type="password"
-        placeholder="Password"
-      />
-      <MyInputText
-        v-model="credentials.repeatedPassword"
-        type="password"
-        placeholder="Repeat password"
-      />
-      <MyButton @click="tryRegister" :text="'register'"/>
+    <MyInputText v-model="credentials.username" type="text" placeholder="Username" />
+    <MyInputText v-model="credentials.email" type="email" placeholder="Email" />
+    <MyInputText v-model="credentials.password" type="password" placeholder="Password" />
+    <MyInputText
+      v-model="credentials.repeatedPassword"
+      type="password"
+      placeholder="Repeat password"
+    />
+    <MyButton @click="tryRegister" :text="'register'" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { reactive } from "vue";
+import { reactive } from 'vue'
 
-import AuthManager from "@/managers/auth_manager";
-import MyInputText from "../../components/input/MyInputText.vue"
-import MyButton from "../../components/buttons/MyButton.vue";
+import AuthManager from '@/managers/auth_manager'
+import MyInputText from '../../components/input/MyInputText.vue'
+import MyButton from '../../components/buttons/MyButton.vue'
 const credentials = reactive({
-  username: "",
-  email: "",
-  password: "",
-  repeatedPassword: "",
-});
+  username: '',
+  email: '',
+  password: '',
+  repeatedPassword: ''
+})
 
 const tryRegister = async () => {
-    if (
-      !credentials.password ||
-      credentials.password !== credentials.repeatedPassword
-    ) {
-      throw new Error("Passwords aren't equal");
-    }
-
-    await AuthManager.register(
-      credentials.username,
-      credentials.email,
-      credentials.password
-    );
+  if (!credentials.password || credentials.password !== credentials.repeatedPassword) {
+    throw new Error("Passwords aren't equal")
   }
+
+  await AuthManager.register(credentials.username, credentials.email, credentials.password)
+}
 </script>

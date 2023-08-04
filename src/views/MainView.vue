@@ -1,18 +1,17 @@
 <template>
-    <div class="card flex flex-col">
+  <div class="card flex flex-col">
     <div class="sticky top-0 z-20 bg-[#121212]">
       <TabMenu :model="items" />
     </div>
     <router-view />
   </div>
-  </template>
-  
+</template>
+
 <script setup lang="ts">
 import TabMenu from 'primevue/tabmenu'
 import 'primevue/resources/themes/md-dark-deeppurple/theme.css'
-import CategoryManager from "@/managers/category_manager";
-import { ref } from "vue";
-import BookManager from '@/managers/book_manager';
+import CategoryManager from '@/managers/category_manager'
+import { ref } from 'vue'
 
 const items = ref([
   {
@@ -24,8 +23,7 @@ const items = ref([
     label: 'Categories',
     icon: 'pi pi-th-large',
     to: '/categories'
-  },
+  }
 ])
-await CategoryManager.loadAll();
+await CategoryManager.loadAll()
 </script>
-  

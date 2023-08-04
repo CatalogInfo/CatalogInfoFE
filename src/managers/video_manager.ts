@@ -3,7 +3,7 @@ import Category from '@/models/category'
 import { Collection, useRepo } from 'pinia-orm'
 import store from '../store/store'
 import YoutubeManager from '@/managers/youtube_manager'
-import VideoResponse from "../dtos/video_response";
+import VideoResponse from '../dtos/responses/video_response'
 import CategoryApi from '@/api/category_api'
 import BaseApiResponse from '@/response/base_api_response'
 
@@ -21,25 +21,26 @@ export default class VideoManager {
   }
 
   static async loadAll(categoryId: number) {
-    const response: BaseApiResponse<VideoResponse> = await CategoryApi.getVideos(categoryId) as BaseApiResponse<VideoResponse>;
-    const videos: Array<VideoResponse> = JSON.parse(JSON.stringify(response.data));
+    const response: BaseApiResponse<VideoResponse> = (await CategoryApi.getVideos(
+      categoryId
+    )) as BaseApiResponse<VideoResponse>
+    const videos: Array<VideoResponse> = JSON.parse(JSON.stringify(response.data))
 
-    console.log(videos);
-    this.repository.save(this.getFormatedVideos(videos));
+    console.log(videos)
+    this.repository.save(this.getFormatedVideos(videos))
   }
 
-  static getFormatedVideos(books: Array<VideoResponse>) {
-    return books.map(this.getFormatedVideo);
+  private static getFormatedVideos(books: Array<VideoResponse>) {
+    return books.map(this.getFormatedVideo)
   }
 
-  static getFormatedVideo(video: VideoResponse) {
-    // const category = CategoryManager.getCategoryById(book.category) as Category
+  private static getFormatedVideo(video: VideoResponse) {
     return {
       id: video.id,
       link: video.link,
       title: video.title,
-      channelTitle: video.channelTitle,
-    };
+      channelTitle: video.channelTitle
+    }
   }
 
   static getVideoByCategory(categoryId: number): Video[] | null {
@@ -51,24 +52,21 @@ export default class VideoManager {
     return videos
   }
 
-  static async createVideo(link: string, category: Category) {
+  static async createVideo(link: string, categoryId: number) {
     if (link != '' && link != null && link != undefined) {
-      const info: VideoApiInfo = await YoutubeManager.getInfoFromLink(link)
-      console.log(info.id);
+      const info: YoutubeRequest = await YoutubeManager.getInfoFromLink(link)
 
       const video = {
         id: info.id,
         link: link,
         title: info.title,
         channelTitle: info.channelTitle
-      };
+      }
 
-      const response = await CategoryApi.createVideo(category.id, video);
-      const bookRes: VideoResponse = JSON.parse(JSON.stringify(response.data));
-      const der = this.getFormatedVideo(bookRes);
+      const videoRes = await CategoryApi.createVideo(categoryId, video)
+      const videoEntity = this.getFormatedVideo(videoRes.data)
 
-      this.repository.save(der);
-
+      this.repository.save(videoEntity)
     }
   }
 }

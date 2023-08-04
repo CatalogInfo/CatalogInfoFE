@@ -6,7 +6,7 @@ export default class Book extends Model {
 
   static fields() {
     return {
-      id: this.attr(null),
+      id: this.number(null),
       category: this.belongsTo(Category, 'categoryId'),
       name: this.string(''),
       categoryId: this.attr(null),
