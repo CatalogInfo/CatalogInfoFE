@@ -20,7 +20,6 @@ export default class BookApi {
       }
 
     public static async getCategories(): Promise<BaseApiResponse<CategoryResponse>> {
-        const res = await ApiFactory.getInstance(this.getOptions()).get<CategoryResponse>("/user/categories");
-        return res;
+        return await ApiFactory.getInstance(this.getOptions()).get<CategoryResponse>("/user/categories");
     }
 }

@@ -21,33 +21,27 @@ export default class CategoryApi {
         };
       }
 
-    public static async createCategory(category: String): Promise<BaseApiResponse<CategoryResponse>> {
-        const res = await ApiFactory.getInstance(this.getOptions()).post<CategoryResponse, unknown>("/", category);
-        return res;
+    public static async getCategories() {
+        return await ApiFactory.getInstance(this.getOptions()).get("/");
     }
 
-    public static async getCategories() {
-        const res = await ApiFactory.getInstance(this.getOptions()).get("/");
-        return res;
+    public static async createCategory(category: String): Promise<BaseApiResponse<CategoryResponse>> {
+        return await ApiFactory.getInstance(this.getOptions()).post<CategoryResponse, unknown>("/", category);
     }
 
     public static async createBook(book: BookData): Promise<BaseApiResponse<BookResponse>> {
-      const res = await ApiFactory.getInstance(this.getOptions()).post<BookResponse, unknown>("/" + book.category.id + "/book", book);
-      return res;
+      return await ApiFactory.getInstance(this.getOptions()).post<BookResponse, unknown>("/" + book.category.id + "/book", book);
     }
 
     public static async createVideo(categoryId: number, video: VideoRequest): Promise<BaseApiResponse<VideoResponse>> {
-      const res = await ApiFactory.getInstance(this.getOptions()).post<VideoResponse, unknown>("/" + categoryId + "/video", video);
-      return res;
+      return await ApiFactory.getInstance(this.getOptions()).post<VideoResponse, unknown>("/" + categoryId + "/video", video);
     }
   
-    public static async getBooks(categoryId: number) {
-      const res = await ApiFactory.getInstance(this.getOptions()).get(`/${categoryId}/books`);
-      return res;
+    public static async getBooks(categoryId: number): Promise<BaseApiResponse<Array<BookResponse>>>{
+      return await ApiFactory.getInstance(this.getOptions()).get<Array<BookResponse>>(`/${categoryId}/books`);
     }
 
     public static async getVideos(categoryId: number) {
-      const res = await ApiFactory.getInstance(this.getOptions()).get(`/${categoryId}/videos`);
-      return res;
+      return await ApiFactory.getInstance(this.getOptions()).get(`/${categoryId}/videos`);
     }
 }

@@ -1,8 +1,4 @@
 import authApi from "@/api/auth_api";
-import CategoryManager from "./category_manager";
-// import EventManager from "./eventManager";
-// import GroupManager from "./groupManager";
-// import UserManager from "./userManager";
 
 export default class AuthManager {
   static getToken() {
@@ -20,7 +16,6 @@ export default class AuthManager {
         password,
       });
 
-      //@ts-ignore
       return res.data.token;
     } catch (error) {
       console.error(error);
@@ -34,16 +29,6 @@ export default class AuthManager {
     }
     const token = await this.getTokenFromApi(username, password);
     this.setToken(token);
-
-    //! to remove
-    await CategoryManager.loadAll();
-
-  }
-
-  static async loadEverything() {
-    // await UserManager.loadAll();
-    // await EventManager.loadAll();
-    // await GroupManager.loadAll();
   }
 
   static logout() {

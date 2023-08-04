@@ -8,4 +8,4 @@ class ApiFactory {
   }
 }
 
-export default new ApiFactory()
+export default new ApiFactory();

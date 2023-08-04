@@ -1,10 +1,10 @@
 import AuthManager from "@/managers/auth_manager";
 
 export default interface ApiOptions {
-  getAccessToken: () => Promise<string | null>;
   baseUrl: string | undefined;
   useAuth: boolean;
   withCredentials: boolean;
+  getAccessToken: () => Promise<string | null>;
 }
 
 export const defaultApiOptions: ApiOptions = {

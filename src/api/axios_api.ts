@@ -71,7 +71,6 @@ export default class AxiosApi implements BaseApi {
     const accessToken = await this.apiOptions.getAccessToken();
     this.axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
     this.axiosInstance.defaults.headers["Content-Type"] = "application/json";
-
   }
 
   private async handleResponseError(error: AxiosError) {
