@@ -3,4 +3,5 @@ export default interface CategoryResponse {
   name: string
   books: number[]
   videos: number[]
+  articles: number[]
 }

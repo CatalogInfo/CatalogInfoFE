@@ -22,9 +22,9 @@ export default class VideoManager {
   }
 
   static async loadAll(categoryId: number) {
-    const response: BaseApiResponse<VideoResponse> = (await CategoryApi.getVideos(
-      categoryId
-    )) as BaseApiResponse<VideoResponse>
+    const response = await CategoryApi.getVideos(
+      categoryId)
+    
     const videos: Array<VideoResponse> = JSON.parse(JSON.stringify(response.data))
 
     this.repository.save(this.getFormatedVideos(videos))

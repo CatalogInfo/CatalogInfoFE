@@ -1,7 +1,6 @@
 <template>
-  <!-- <div  @contextmenu="onContextMenu($event)"> -->
-  <div class="flex flex-row w-92 h-56 bg-black rounded-lg">
-  <Button id="itemBut" class="w-full bg-white">
+  <div class="flex flex-row rounded-lg">
+  <Button id="itemBut" class="w-96 bg-white">
     <div class="rounded-lg p-4 bg-[#1a1a1a]">
       <IconBook></IconBook>
     </div>
@@ -17,14 +16,14 @@
         <IconFeather />
         <p class="text-left font-thin">{{ item.author }}</p>
       </div>
- 
     </div>
-    <Dropdown class="relative">
+  </Button>
+
+    <Dropdown class="w-36">
       <DropdownItem @action="deleteBook()">
         <i class="pi pi-trash"></i>
       </DropdownItem>
     </Dropdown>
-  </Button>
  
   </div>
 </template>
@@ -46,8 +45,8 @@ const props = defineProps({
   }
 })
 
-const deleteBook = () => {
-  BookManager.deleteBook(props.item.id, props.item.categoryId);
+const deleteBook = async () => {
+  await BookManager.deleteBook(props.item.id, props.item.categoryId);
 }
 </script>
 <style scoped>

@@ -1,4 +1,5 @@
 import { Model } from 'pinia-orm'
+import Article from './article'
 import Book from './book'
 import Video from './video'
 
@@ -10,7 +11,8 @@ export default class Category extends Model {
       id: this.number(null),
       books: this.hasMany(Book, 'categoryId'),
       name: this.string(''),
-      videos: this.hasMany(Video, 'categoryId')
+      videos: this.hasMany(Video, 'categoryId'),
+      articles: this.hasMany(Article, 'categoryId')
     }
   }
 
@@ -18,4 +20,5 @@ export default class Category extends Model {
   declare books: Book[]
   declare name: string
   declare videos: Video[]
+  declare articles: Article[]
 }

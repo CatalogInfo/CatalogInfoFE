@@ -26,7 +26,7 @@
         </TabPanel>
       </TabView>
     </div>
-    <div class="ml-2 flex flex-col self-start w-1/4" v-if="getActive() === 0">
+    <div class="ml-2 flex flex-col self-start" v-if="getActive() === 0">
       <AddButton class="mt-2" @click="createBook()" />
 
       <BookItem
@@ -37,10 +37,10 @@
         @click.self="goToBook(book.id)"
       />
     </div>
-    <div class="ml-2 flex flex-col self-start w-1/2" v-if="getActive() === 1">
+    <div class="ml-2 flex flex-col self-start" v-if="getActive() === 1">
       <InputSlideBar
         @doToggle="doToggle()"
-        @submit="submit()"
+        @submit="submitVideo()"
         :toggle="toggle"
         :valueString="link"
         :wrong-input-placeholder="'empty input'"
@@ -48,6 +48,19 @@
       ></InputSlideBar>
 
       <VideoItem class="mt-4" v-for="video in videos" :key="video.id" :item="video" />
+    </div>
+
+    <div class="ml-2 flex flex-col self-start w-1/2" v-if="getActive() === 2">
+      <InputSlideBar
+        @doToggle="doToggle()"
+        @submit="submitArticle()"
+        :toggle="toggle"
+        :valueString="link"
+        :wrong-input-placeholder="'empty input'"
+        :placeholder="'link'"
+      ></InputSlideBar>
+
+      <ArticleItem class="mt-4" v-for="article in articles" :key="article.id" :item="article"/>
     </div>
   </div>
 </template>
@@ -64,6 +77,8 @@ import BookItem from '@/components/items/BookItem.vue'
 import VideoItem from '@/components/items/VideoItem.vue'
 import BufferManager from '@/managers/buffer_manager'
 import CategoryManager from '@/managers/category_manager'
+import ArticleItem from '@/components/items/ArticleItem.vue'
+import ArticleManager from '@/managers/article_manager'
 
 const props = defineProps({
   id: {
@@ -81,14 +96,24 @@ const toggle = ref(false)
 const category = computed(() => CategoryManager.getCategoryById(props.id))
 const books = ref(computed(() => category.value?.books))
 const videos = ref(computed(() => category.value?.videos))
+const articles = ref(computed(() => category.value?.articles))
+
 
 const doToggle = () => {
   toggle.value = !toggle.value
 }
 
-const submit = async () => {
+const submitVideo = async () => {
   const linkString: string = String(BufferManager.get()?.value)
   await VideoManager.createVideo(linkString, props.id)
+
+  doToggle()
+  clearInput()
+}
+
+const submitArticle = async () => {
+  const linkString: string = String(BufferManager.get()?.value)
+  await ArticleManager.createArticle({ title: "Ti", link: linkString }, props.id)
 
   doToggle()
   clearInput()

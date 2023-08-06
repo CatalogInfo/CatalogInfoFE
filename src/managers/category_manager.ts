@@ -7,6 +7,7 @@ import UserApi from '../api/user_api'
 import BookManager from './book_manager'
 import VideoManager from './video_manager'
 import CategoryRequest from '@/dtos/requests/category_request'
+import ArticleManager from './article_manager'
 
 export default class CategoryManager {
   protected static get repository() {
@@ -41,6 +42,8 @@ export default class CategoryManager {
   private static async loadAllCategoryRelationships(categoryId: number) {
     await BookManager.loadAll(categoryId)
     await VideoManager.loadAll(categoryId)
+    await ArticleManager.loadAll(categoryId)
+
   }
 
   private static async getFormatedCategories(categories: Array<CategoryResponse>) {
@@ -56,7 +59,7 @@ export default class CategoryManager {
   private static async getFormatedCategory(category: CategoryResponse) {
     await this.loadAllCategoryRelationships(category.id)
 
-    console.log(category.id)
+    console.log(category)
 
     return {
       id: category.id,
@@ -66,6 +69,9 @@ export default class CategoryManager {
       }),
       videos: category.videos.map((videoId) => {
         return { id: videoId, ...VideoManager.getVideoById(videoId) }
+      }),
+      articles: category.articles.map((articleId) => {
+        return { id: articleId, ...ArticleManager.getArticleById(articleId) }
       })
     }
   }

@@ -1,6 +1,6 @@
 <template>
   <div class="relative flex flex-row w-full">
-  <Button id="itemBut" class="bg-black rounded-lg">
+  <Button id="itemBut" class="w-96 bg-black rounded-lg">
     <div class="flex flex-row">
       <div class="flex flex-col">
         <YouTube :src="item.link" :width="'200px'" :height="'150px'" />
@@ -11,7 +11,7 @@
       </div>
     </div>
   </Button>
-  <Dropdown class="">
+  <Dropdown class="w-36">
     <div class="">
       <div class="relative flex space-x-2">
       <DropdownItem class="" @click="deleteVideo()">
@@ -33,8 +33,6 @@ import YouTube from 'vue3-youtube'
 import DropdownItem from '@/components/menu/DropdownItem.vue';
 import Dropdown from '@/components/menu/Dropdown.vue';
 import VideoManager from '@/managers/video_manager';
-
-
 
 const props = defineProps({
   item: {

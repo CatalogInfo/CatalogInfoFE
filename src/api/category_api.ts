@@ -6,8 +6,10 @@ import AuthManager from '@/managers/auth_manager'
 import BookRequest from '@/dtos/requests/book_request'
 import BookResponse from '@/dtos/responses/book_response'
 import VideoResponse from '@/dtos/responses/video_response'
+import ArticleResponse from '@/dtos/responses/article_response'
 import VideoRequest from '@/dtos/requests/video_request'
 import CategoryRequest from '@/dtos/requests/category_request'
+import ArticleRequest from '@/dtos/requests/article_request'
 
 export default class CategoryApi {
   static baseUrl = 'http://localhost:8081/category'
@@ -54,12 +56,31 @@ export default class CategoryApi {
     )
   }
 
+  public static async createArticle(
+    article: ArticleRequest,
+    categoryId: number
+  ): Promise<BaseApiResponse<ArticleResponse>> {
+    return await ApiFactory.getInstance(this.getOptions()).post<ArticleResponse, unknown>(
+      '/' + categoryId + '/article',
+      article
+    )
+  }
+
   public static async deleteBook(
     categoryId: number,
     bookId: number
   ): Promise<BaseApiResponse<String>> {
     return await ApiFactory.getInstance(this.getOptions()).delete<String>(
       '/' + categoryId + '/book/' +bookId
+    )
+  }
+
+  public static async deleteArticle(
+    categoryId: number,
+    articleId: number
+  ): Promise<BaseApiResponse<String>> {
+    return await ApiFactory.getInstance(this.getOptions()).delete<String>(
+      '/' + categoryId + '/article/' + articleId
     )
   }
 
@@ -78,8 +99,12 @@ export default class CategoryApi {
     )
   }
 
-  public static async getVideos(categoryId: number) {
-    return await ApiFactory.getInstance(this.getOptions()).get(`/${categoryId}/videos`)
+  public static async getVideos(categoryId: number): Promise<BaseApiResponse<Array<VideoResponse>>> {
+    return await ApiFactory.getInstance(this.getOptions()).get<Array<VideoResponse>>(`/${categoryId}/videos`)
+  }
+
+  public static async getArticles(categoryId: number): Promise<BaseApiResponse<Array<ArticleResponse>>> {
+    return await ApiFactory.getInstance(this.getOptions()).get<Array<ArticleResponse>>(`/${categoryId}/articles`)
   }
 
   public static async deleteCategory(categoryId: number): Promise<BaseApiResponse<String>> {
