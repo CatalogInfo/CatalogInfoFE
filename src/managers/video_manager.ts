@@ -25,7 +25,6 @@ export default class VideoManager {
     const response: BaseApiResponse<VideoResponse> = (await CategoryApi.getVideos(
       categoryId
     )) as BaseApiResponse<VideoResponse>
-    console.log(response);
     const videos: Array<VideoResponse> = JSON.parse(JSON.stringify(response.data))
 
     this.repository.save(this.getFormatedVideos(videos))
@@ -70,5 +69,10 @@ export default class VideoManager {
       this.repository.save(videoEntity)
       await CategoryManager.loadAll();
     }
+  }
+
+  public static async deleteVideo(videoId: string, categoryId: number) {
+    await CategoryApi.deleteVideo(categoryId, videoId);
+    await CategoryManager.loadAll();
   }
 }

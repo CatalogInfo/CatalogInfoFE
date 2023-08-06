@@ -47,4 +47,9 @@ export default class BookManager {
       text: book.text
     }
   }
+
+  public static async deleteBook(bookId: number, categoryId: number) {
+    await CategoryApi.deleteBook(categoryId, bookId);
+    await CategoryManager.loadAll();
+  }
 }

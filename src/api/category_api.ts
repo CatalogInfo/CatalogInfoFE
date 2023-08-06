@@ -54,6 +54,24 @@ export default class CategoryApi {
     )
   }
 
+  public static async deleteBook(
+    categoryId: number,
+    bookId: number
+  ): Promise<BaseApiResponse<String>> {
+    return await ApiFactory.getInstance(this.getOptions()).delete<String>(
+      '/' + categoryId + '/book/' +bookId
+    )
+  }
+
+  public static async deleteVideo(
+    categoryId: number,
+    videoId: string
+  ): Promise<BaseApiResponse<String>> {
+    return await ApiFactory.getInstance(this.getOptions()).delete<String>(
+      '/' + categoryId + '/video/' + videoId
+    )
+  }
+
   public static async getBooks(categoryId: number): Promise<BaseApiResponse<Array<BookResponse>>> {
     return await ApiFactory.getInstance(this.getOptions()).get<Array<BookResponse>>(
       `/${categoryId}/books`
@@ -62,5 +80,9 @@ export default class CategoryApi {
 
   public static async getVideos(categoryId: number) {
     return await ApiFactory.getInstance(this.getOptions()).get(`/${categoryId}/videos`)
+  }
+
+  public static async deleteCategory(categoryId: number): Promise<BaseApiResponse<String>> {
+    return await ApiFactory.getInstance(this.getOptions()).delete<String>(`/${categoryId}`);
   }
 }

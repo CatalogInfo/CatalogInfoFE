@@ -1,5 +1,7 @@
 <template>
-  <Button id="itemBut" class="flex flex-row bg-black rounded-lg">
+  <!-- <div  @contextmenu="onContextMenu($event)"> -->
+  <div class="flex flex-row w-92 h-56 bg-black rounded-lg">
+  <Button id="itemBut" class="w-full bg-white">
     <div class="rounded-lg p-4 bg-[#1a1a1a]">
       <IconBook></IconBook>
     </div>
@@ -15,8 +17,16 @@
         <IconFeather />
         <p class="text-left font-thin">{{ item.author }}</p>
       </div>
+ 
     </div>
+    <Dropdown class="relative">
+      <DropdownItem @action="deleteBook()">
+        <i class="pi pi-trash"></i>
+      </DropdownItem>
+    </Dropdown>
   </Button>
+ 
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -25,12 +35,20 @@ import Book from '@/models/book'
 import IconFeather from '../icons/IconFeather.vue'
 import IconStyle from '../icons/IconStyle.vue'
 import IconBook from '../icons/IconBook.vue'
-defineProps({
+import BookManager from '@/managers/book_manager'
+import DropdownItem from '@/components/menu/DropdownItem.vue';
+import Dropdown from '@/components/menu/Dropdown.vue';
+
+const props = defineProps({
   item: {
     type: Book,
     required: true
   }
 })
+
+const deleteBook = () => {
+  BookManager.deleteBook(props.item.id, props.item.categoryId);
+}
 </script>
 <style scoped>
 #itemBut {
@@ -41,7 +59,7 @@ defineProps({
   box-shadow: 0px 0px 4px 4px rgba(190, 52, 203, 0.3);
 }
 
-#itemBut:hover {
+#itemBut:hover > .close{
   background-color: black;
   color: rgb(179, 179, 179);
   box-shadow: 0px 0px 4px 4px #822e75;
@@ -49,5 +67,10 @@ defineProps({
 
 #text {
   font-family: Roboto, Arial, sans-serif;
+}
+
+.close {
+  display: none;
+  float: right;
 }
 </style>

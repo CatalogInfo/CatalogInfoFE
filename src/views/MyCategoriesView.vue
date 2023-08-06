@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col">
+  <div class="flex flex-col w-full">
     <div class="mt-5 flex flex-col">
       <InputSlideBar
         @doToggle="doToggle()"
@@ -13,12 +13,12 @@
 
     <SearchBarVue />
 
-    <div class="relative z-10 ml-2 w-1/6 grid grid-cols-1 mt-10">
+    <div class="relative w-1/4 ml-2 grid grid-cols-1 mt-10">
       <CategoryItem
         v-for="item in categories"
         :key="item.id"
         :item="item"
-        @click="goToGategoryView(item)"
+        @goToGategoryView="goToGategoryView(item)"
       />
     </div>
   </div>
@@ -35,12 +35,11 @@ import CategoryManager from '@/managers/category_manager'
 import BufferManager from '@/managers/buffer_manager'
 import Category from '@/models/category'
 import CategoryRequest from '@/dtos/requests/category_request'
-import ToastManager from '@/managers/toast_manager'
 
 const router = useRouter()
 const categoryString = ref('')
 const toggle = ref(false)
-const categories = ref(computed(() => CategoryManager.all() as Category[]))
+const categories = ref(computed(() => CategoryManager.all()))
 
 const doToggle = () => {
   toggle.value = !toggle.value

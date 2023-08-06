@@ -13,7 +13,8 @@ export default class CategoryManager {
     return useRepo(Category, store)
   }
 
-  static all(): Category[] {
+  static all() {
+    console.log(this.repository.withAllRecursive().all())
     return this.repository.withAllRecursive().all()
   }
 
@@ -21,7 +22,8 @@ export default class CategoryManager {
     const response = await UserApi.getCategories()
     const categories = await this.getFormatedCategories(response.data)
 
-    this.repository.save(categories)
+    this.repository.flush();
+    this.repository.save(categories);
   }
 
   static getCategoryById(id: Number): Category | null {
@@ -42,6 +44,7 @@ export default class CategoryManager {
   }
 
   private static async getFormatedCategories(categories: Array<CategoryResponse>) {
+    console.log(categories);
     const _this = this
     return Promise.all(
       categories.map(async (category) => {
@@ -53,6 +56,8 @@ export default class CategoryManager {
   private static async getFormatedCategory(category: CategoryResponse) {
     await this.loadAllCategoryRelationships(category.id)
 
+    console.log(category.id)
+
     return {
       id: category.id,
       name: category.name,
@@ -63,5 +68,10 @@ export default class CategoryManager {
         return { id: videoId, ...VideoManager.getVideoById(videoId) }
       })
     }
+  }
+
+  public static async deleteCategory(categoryId: number) {
+    await CategoryApi.deleteCategory(categoryId);
+    await CategoryManager.loadAll();
   }
 }

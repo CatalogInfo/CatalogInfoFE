@@ -34,10 +34,10 @@
         v-for="book in books"
         :key="book.id"
         :item="book"
-        @click="goToBook(book.id)"
+        @click.self="goToBook(book.id)"
       />
     </div>
-    <div class="ml-2 flex flex-col self-start w-1/3" v-if="getActive() === 1">
+    <div class="ml-2 flex flex-col self-start w-1/2" v-if="getActive() === 1">
       <InputSlideBar
         @doToggle="doToggle()"
         @submit="submit()"
