@@ -4,4 +4,7 @@ export default interface CategoryResponse {
   books: number[]
   videos: number[]
   articles: number[]
+  parent: number | null
+  children: CategoryResponse[] | null
+  hasChildren: boolean 
 }

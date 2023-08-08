@@ -34,7 +34,7 @@
         v-for="book in books"
         :key="book.id"
         :item="book"
-        @click.self="goToBook(book.id)"
+        @click="goToBook(book.id)"
       />
     </div>
     <div class="ml-2 flex flex-col self-start" v-if="getActive() === 1">

@@ -15,7 +15,6 @@ export default class CategoryManager {
   }
 
   static all() {
-    console.log(this.repository.withAllRecursive().all())
     return this.repository.withAllRecursive().all()
   }
 
@@ -46,7 +45,10 @@ export default class CategoryManager {
 
   }
 
-  private static async getFormatedCategories(categories: Array<CategoryResponse>) {
+  private static async getFormatedCategories(categories: Array<CategoryResponse> | null) {
+    if(categories === null) {
+      return;
+    }
     console.log(categories);
     const _this = this
     return Promise.all(
@@ -72,7 +74,9 @@ export default class CategoryManager {
       }),
       articles: category.articles.map((articleId) => {
         return { id: articleId, ...ArticleManager.getArticleById(articleId) }
-      })
+      }),
+      // parent: category.parent,
+      hasChildren: category.hasChildren
     }
   }
 

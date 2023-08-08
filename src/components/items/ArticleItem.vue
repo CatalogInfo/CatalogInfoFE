@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-row rounded-lg">
     <Button id="itemBut" class="w-96 bg-white">
-      <div class="rounded-lg p-4 bg-[#1a1a1a]">
+      <div class="rounded-lg bg-[#1a1a1a]">
         <IconArticle></IconArticle>
       </div>
       <div id="text" class="flex flex-col ml-10 w-full space-y-4">
