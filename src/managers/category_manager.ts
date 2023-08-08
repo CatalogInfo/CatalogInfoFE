@@ -24,6 +24,7 @@ export default class CategoryManager {
 
     this.repository.flush();
     this.repository.save(categories);
+    console.log(categories)
   }
 
   static getCategoryById(id: Number): Category | null {
@@ -49,7 +50,6 @@ export default class CategoryManager {
     if(categories === null) {
       return;
     }
-    console.log(categories);
     const _this = this
     return Promise.all(
       categories.map(async (category) => {
@@ -61,7 +61,9 @@ export default class CategoryManager {
   private static async getFormatedCategory(category: CategoryResponse) {
     await this.loadAllCategoryRelationships(category.id)
 
-    console.log(category)
+    if(category.parent === -1) {
+      category.parent = null;
+    }
 
     return {
       id: category.id,
@@ -75,7 +77,8 @@ export default class CategoryManager {
       articles: category.articles.map((articleId) => {
         return { id: articleId, ...ArticleManager.getArticleById(articleId) }
       }),
-      // parent: category.parent,
+      parent: category.parent,
+      children: await this.getFormatedCategories(category.children),
       hasChildren: category.hasChildren
     }
   }

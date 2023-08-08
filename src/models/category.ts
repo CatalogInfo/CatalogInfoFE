@@ -13,8 +13,8 @@ export default class Category extends Model {
       name: this.string(''),
       videos: this.hasMany(Video, 'categoryId'),
       articles: this.hasMany(Article, 'categoryId'),
-      children: this.hasMany(Category, 'categoryId'),
-      parent: this.belongsTo(Category, 'categoryId'),
+      children: this.attr(null),
+      parent: this.attr(0),
       hasChildren: this.attr(false)
     }
   }

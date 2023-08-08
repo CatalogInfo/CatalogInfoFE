@@ -36,7 +36,6 @@
      :key="cat.id"
     :item="cat"
     >
-
     </CategoryItem>
   </div>
   </div>
@@ -52,13 +51,17 @@ import CategoryManager from '@/managers/category_manager';
 import CategoryRequest from '@/dtos/requests/category_request';
 import BufferManager from '@/managers/buffer_manager';
 import AddItem from '../input/AddItem.vue';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 const props = defineProps({
   item: {
     type: Category,
     required: true
   }
+})
+
+onMounted(() => {
+  console.log(props.item.children);
 })
 
 const toggle = ref(false)
