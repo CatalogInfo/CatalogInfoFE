@@ -20,7 +20,6 @@ export default class ArticleManager {
     const articles = response.data
 
     this.repository.save(this.getFormatedArticles(articles))
-    console.log(this.repository.all())
 
   }
 

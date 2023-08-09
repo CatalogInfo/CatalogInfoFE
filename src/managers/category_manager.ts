@@ -1,7 +1,7 @@
 import CategoryApi from '@/api/category_api'
 import CategoryResponse from '@/dtos/responses/category_response'
 import Category from '@/models/category'
-import { useRepo } from 'pinia-orm'
+import { Collection, useRepo } from 'pinia-orm'
 import store from '../store/store'
 import UserApi from '../api/user_api'
 import BookManager from './book_manager'
@@ -9,12 +9,13 @@ import VideoManager from './video_manager'
 import CategoryRequest from '@/dtos/requests/category_request'
 import ArticleManager from './article_manager'
 
+
 export default class CategoryManager {
   protected static get repository() {
     return useRepo(Category, store)
   }
 
-  static all() {
+  static all(): Collection<Category> {
     return this.repository.withAllRecursive().all()
   }
 
@@ -24,7 +25,6 @@ export default class CategoryManager {
 
     this.repository.flush();
     this.repository.save(categories);
-    console.log(categories)
   }
 
   static getCategoryById(id: Number): Category | null {

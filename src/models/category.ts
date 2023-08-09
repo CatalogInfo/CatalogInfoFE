@@ -1,4 +1,4 @@
-import { Model } from 'pinia-orm'
+import { Collection, Model } from 'pinia-orm'
 import Article from './article'
 import Book from './book'
 import Video from './video'
@@ -14,16 +14,16 @@ export default class Category extends Model {
       videos: this.hasMany(Video, 'categoryId'),
       articles: this.hasMany(Article, 'categoryId'),
       children: this.attr(null),
-      parent: this.attr(0),
+      parent: this.attr(null),
       hasChildren: this.attr(false)
     }
   }
 
   declare id: number
-  declare books: Book[]
+  declare books: Collection<Book>
   declare name: string
-  declare children: Category[]
-  declare parent: number
+  declare children: Collection<Category> | undefined
+  declare parent: number | null
   declare hasChildren: boolean
   declare videos: Video[]
   declare articles: Article[]

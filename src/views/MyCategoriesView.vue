@@ -7,7 +7,7 @@
     <SearchBarVue />
 
     <div class="relative ml-2 flex flex-col-reverse mt-10 space-y-3">
-      <CategoryItem
+      <!-- <CategoryItem
       v-for="item in categories"
         :key="item.id"
         :item="item"
@@ -21,7 +21,8 @@
         :wrongInputPlaceholder="'empty input'"
         :placeholder="'type name...'"
         v-if="toggle"
-      ></AddItem>
+      ></AddItem> -->
+      <Tree :items="categories"></Tree>
 
     </div>
   </div>
@@ -38,12 +39,13 @@ import BufferManager from '@/managers/buffer_manager'
 import Category from '@/models/category'
 import CategoryRequest from '@/dtos/requests/category_request'
 import AddItem from '@/components/input/AddItem.vue'
+import Tree from "@/components/items/Tree.vue";
 import AddButton from '@/components/buttons/AddButton.vue'
 
 const router = useRouter()
 const categoryString = ref('')
 const toggle = ref(false)
-const categories = ref(computed(() => CategoryManager.all()))
+const categories = computed(() => CategoryManager.all())
 
 const doToggle = () => {
   toggle.value = !toggle.value;
