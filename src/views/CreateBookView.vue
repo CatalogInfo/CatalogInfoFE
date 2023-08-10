@@ -26,15 +26,13 @@ import MyInputText from '@/components/input/MyInputText.vue'
 import 'primeicons/primeicons.css'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import CategoryManager from '@/managers/category_manager'
 import BookManager from '@/managers/book_manager'
-import Category from '@/models/category'
 import UploadFile from '@/components/input/UploadFile.vue'
 import FileUtils from '../utils/file_utils'
 
 const props = defineProps({
   id: {
-    type: String,
+    type: Number,
     required: true
   }
 })

@@ -14,7 +14,7 @@ import { PropType } from "vue";
 
 const router = useRouter();
 const goToGategoryView = (item: Category) => {
-  router.push('/categories/' + item.id.toString())
+  router.push('/categories/' + item.id)
 }
 
 defineProps({

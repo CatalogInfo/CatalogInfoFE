@@ -128,10 +128,11 @@ const getActive = () => {
 }
 
 const goToBook = (id: number) => {
-  router.push('/categories/' + props.id + '/book/' + id.toString())
+  router.push('/categories/' + props.id + '/book/' + id)
 }
 
 const createBook = () => {
+  console.log(category.value);
   router.push(`/categories/${props.id}/book`)
 }
 </script>

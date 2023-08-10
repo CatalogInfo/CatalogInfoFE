@@ -18,6 +18,7 @@ export default class BookManager {
   static async loadAll(categoryId: number) {
     const response = await CategoryApi.getBooks(categoryId)
     const books = response.data
+    console.log(this.getFormatedBooks(books));
 
     this.repository.save(this.getFormatedBooks(books))
   }

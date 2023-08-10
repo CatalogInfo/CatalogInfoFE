@@ -36,6 +36,15 @@ export default class CategoryApi {
     )
   }
 
+  public static async createChild(
+    categoryRequest: CategoryRequest, parentId: number
+  ): Promise<BaseApiResponse<CategoryResponse>> {
+    return await ApiFactory.getInstance(this.getOptions()).post<CategoryResponse, unknown>(
+      '/' + parentId,
+      categoryRequest
+    )
+  }
+
   public static async createBook(
     book: BookRequest,
     categoryId: number

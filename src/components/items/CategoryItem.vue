@@ -73,7 +73,7 @@ const doToggle = () => {
 
 const submit = async () => {
   const categoryRequest: CategoryRequest = { name: BufferManager.get()?.value as string }
-  await CategoryManager.createCategory(categoryRequest)
+  // await CategoryManager.createCategory(categoryRequest)
 
   if (BufferManager.get()?.value != '') {
     doToggle()

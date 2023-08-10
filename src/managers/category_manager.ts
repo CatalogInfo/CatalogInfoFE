@@ -16,6 +16,7 @@ export default class CategoryManager {
   }
 
   static all(): Collection<Category> {
+    console.log(this.repository.withAllRecursive().all())
     return this.repository.withAllRecursive().all()
   }
 
@@ -23,23 +24,51 @@ export default class CategoryManager {
     const response = await UserApi.getCategories()
     const categories = await this.getFormatedCategories(response.data)
 
+    console.log(categories);
     this.repository.flush();
     this.repository.save(categories);
   }
 
   static getCategoryById(id: Number): Category | null {
-    return this.repository.where('id', id).first()
+    let category = null;
+    for (let i = 0; i < this.all().length; i++) {
+      category = this.findNodeById(this.repository.all()[i], id);
+      if(category !== null) {
+        break;
+      }
+    }
+    console.log(category);
+    return category;
   }
 
-  static async createCategory(categoryRequest: CategoryRequest) {
-    const response = await CategoryApi.createCategory(categoryRequest)
-    const category = response.data
+static findNodeById(tree: Category, id: Number) {
 
-    this.repository.save({ id: category.id, name })
+    let result = null
+    if (tree.id === id) {
+         return tree;
+    }
+ 
+    if (Array.isArray(tree.children) && tree.children.length > 0) {
+       tree.children.some((node: Category) => {
+         result = this.findNodeById(node, id);
+         return result;
+       });
+    }
+    return result;
+}
+
+  static async createCategory(categoryRequest: CategoryRequest, parentId: number | null) {
+    if (parentId === null || parentId === -1) {
+      await CategoryApi.createCategory(categoryRequest)
+    } else {
+      await CategoryApi.createChild(categoryRequest, parentId)
+    }
+    
     await CategoryManager.loadAll();
   }
 
   private static async loadAllCategoryRelationships(categoryId: number) {
+    console.log(categoryId)
     await BookManager.loadAll(categoryId)
     await VideoManager.loadAll(categoryId)
     await ArticleManager.loadAll(categoryId)
@@ -78,8 +107,8 @@ export default class CategoryManager {
         return { id: articleId, ...ArticleManager.getArticleById(articleId) }
       }),
       parent: category.parent,
+      hasChildren: category.hasChildren,
       children: await this.getFormatedCategories(category.children),
-      hasChildren: category.hasChildren
     }
   }
 

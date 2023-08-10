@@ -3,9 +3,9 @@
 >
       <input
         v-model="value"
-        id="itemInput"
         v-focus 
-        class="text-left h-24 w-96 bg-black rounded-lg p-8 shadow-xl font-semibold text-xl"
+        id="itemInput"
+        class="text-left bg-blue-sky-900 w-full h-12 p-4 rounded-lg shadow-xl font-semibold text-xl"
         :placeholder="tip"
         @input="normalizeInputStyle"
         @keyup.enter="submit()"
@@ -23,10 +23,6 @@ const vFocus = {
 const emit = defineEmits(['doToggle', 'submit'])
 
 const emptyStyleColor = 'red'
-
-const test = () => {
-    console.log("AAAAAAA");
-}
 
 const props = defineProps({
   toggle: {
@@ -52,14 +48,6 @@ const tip = ref(props.placeholder)
 const normalInputStyle = '0px transparent'
 const emptyInputStyle = '1px solid ' + emptyStyleColor
 let inputStyle = ref('0px transparent')
-
-const focusout = () => {
-  normalizeInputStyle()
-
-  if (props.toggle === true) {
-    emit('doToggle')
-  }
-}
 
 const value = ref(props.valueString)
 
@@ -87,26 +75,20 @@ const submit = () => {
 <style scoped>
 #itemInput {
 opacity: 0.6;
-background-color: rgb(16, 16, 16);
-border: 2px solid #822e75;
+/* background-color: rgb(16, 16, 16);
+border: 2px solid #822e75; */
 color: white;
-box-shadow: 0px 0px 4px 4px rgba(190, 52, 203, 0.3);
-}
-
-#itemInput:hover {
-/* opacity: 0.7; */
-/* box-shadow: 0px 0px 4px 4px #822e75; */
-/* pointer-events: none; */
-
+/* box-shadow: 0px 0px 4px 4px rgba(190, 52, 203, 0.3); */
 }
 
 #itemInput:focus {
   outline: none;
 }
 
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+::placeholder {
   color: rgb(146, 134, 134);
-  opacity: 0.5; /* Firefox */
+  opacity: 0.5; 
+  font-weight: normal;
 }
 
 </style>

@@ -37,10 +37,11 @@ import IconBook from '../icons/IconBook.vue'
 import BookManager from '@/managers/book_manager'
 import DropdownItem from '@/components/menu/DropdownItem.vue';
 import Dropdown from '@/components/menu/Dropdown.vue';
+import { PropType } from 'vue'
 
 const props = defineProps({
   item: {
-    type: Book,
+    type: Object as PropType<Book>,
     required: true
   }
 })
