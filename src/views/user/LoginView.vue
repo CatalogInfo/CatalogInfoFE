@@ -28,13 +28,13 @@ const credentials = reactive({
 })
 
 const tryLogin = async () => {
-  try{
+  try {
     await AuthManager.login(credentials.username, credentials.password)
   } catch (e) {
-    ToastManager.showErrorToast(e);
-    return;
+    ToastManager.showErrorToast(e)
+    return
   }
-  ToastManager.showSuccessToast("Logged in!");
+  ToastManager.showSuccessToast('Logged in!')
 
   router.push('/')
 }

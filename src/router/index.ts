@@ -37,20 +37,19 @@ const router = createRouter({
           path: '/categories/:id',
           name: 'category',
           component: CategoryView,
-          props: propsParser({id: Number})
+          props: propsParser({ id: Number })
         },
         {
           path: '/categories/:id/book',
           name: 'createBook',
           component: CreateBookView,
           props: propsParser({ id: Number })
-
         },
         {
           path: '/categories/:id/book/:bookId',
           name: 'bookView',
           component: BookView,
-          props:  propsParser({ id: Number, bookId: Number}),
+          props: propsParser({ id: Number, bookId: Number })
         },
         {
           path: '/categories',
@@ -68,4 +67,3 @@ const router = createRouter({
 })
 
 export default router
-

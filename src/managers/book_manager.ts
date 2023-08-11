@@ -18,7 +18,6 @@ export default class BookManager {
   static async loadAll(categoryId: number) {
     const response = await CategoryApi.getBooks(categoryId)
     const books = response.data
-    console.log(this.getFormatedBooks(books));
 
     this.repository.save(this.getFormatedBooks(books))
   }
@@ -32,7 +31,7 @@ export default class BookManager {
     const bookEntity = this.getFormatedBook(response.data)
 
     this.repository.save(bookEntity)
-    await CategoryManager.loadAll();
+    await CategoryManager.loadAll()
   }
 
   private static getFormatedBooks(books: Array<BookResponse>) {
@@ -50,7 +49,7 @@ export default class BookManager {
   }
 
   public static async deleteBook(bookId: number, categoryId: number) {
-    await CategoryApi.deleteBook(categoryId, bookId);
-    await CategoryManager.loadAll();
+    await CategoryApi.deleteBook(categoryId, bookId)
+    await CategoryManager.loadAll()
   }
 }

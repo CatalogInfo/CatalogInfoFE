@@ -9,14 +9,12 @@ import VideoManager from './video_manager'
 import CategoryRequest from '@/dtos/requests/category_request'
 import ArticleManager from './article_manager'
 
-
 export default class CategoryManager {
   protected static get repository() {
     return useRepo(Category, store)
   }
 
   static all(): Collection<Category> {
-    console.log(this.repository.withAllRecursive().all())
     return this.repository.withAllRecursive().all()
   }
 
@@ -24,38 +22,35 @@ export default class CategoryManager {
     const response = await UserApi.getCategories()
     const categories = await this.getFormatedCategories(response.data)
 
-    console.log(categories);
-    this.repository.flush();
-    this.repository.save(categories);
+    this.repository.flush()
+    this.repository.save(categories)
   }
 
   static getCategoryById(id: Number): Category | null {
-    let category = null;
+    let category = null
     for (let i = 0; i < this.all().length; i++) {
-      category = this.findNodeById(this.repository.all()[i], id);
-      if(category !== null) {
-        break;
+      category = this.findNodeById(this.repository.all()[i], id)
+      if (category !== null) {
+        break
       }
     }
-    console.log(category);
-    return category;
+    return category
   }
 
-static findNodeById(tree: Category, id: Number) {
-
+  private static findNodeById(tree: Category, id: Number) {
     let result = null
     if (tree.id === id) {
-         return tree;
+      return tree
     }
- 
+
     if (Array.isArray(tree.children) && tree.children.length > 0) {
-       tree.children.some((node: Category) => {
-         result = this.findNodeById(node, id);
-         return result;
-       });
+      tree.children.some((node: Category) => {
+        result = this.findNodeById(node, id)
+        return result
+      })
     }
-    return result;
-}
+    return result
+  }
 
   static async createCategory(categoryRequest: CategoryRequest, parentId: number | null) {
     if (parentId === null || parentId === -1) {
@@ -63,21 +58,19 @@ static findNodeById(tree: Category, id: Number) {
     } else {
       await CategoryApi.createChild(categoryRequest, parentId)
     }
-    
-    await CategoryManager.loadAll();
+
+    await CategoryManager.loadAll()
   }
 
   private static async loadAllCategoryRelationships(categoryId: number) {
-    console.log(categoryId)
     await BookManager.loadAll(categoryId)
     await VideoManager.loadAll(categoryId)
     await ArticleManager.loadAll(categoryId)
-
   }
 
   private static async getFormatedCategories(categories: Array<CategoryResponse> | null) {
-    if(categories === null) {
-      return;
+    if (categories === null) {
+      return
     }
     const _this = this
     return Promise.all(
@@ -90,8 +83,8 @@ static findNodeById(tree: Category, id: Number) {
   private static async getFormatedCategory(category: CategoryResponse) {
     await this.loadAllCategoryRelationships(category.id)
 
-    if(category.parent === -1) {
-      category.parent = null;
+    if (category.parent === -1) {
+      category.parent = null
     }
 
     return {
@@ -108,12 +101,12 @@ static findNodeById(tree: Category, id: Number) {
       }),
       parent: category.parent,
       hasChildren: category.hasChildren,
-      children: await this.getFormatedCategories(category.children),
+      children: await this.getFormatedCategories(category.children)
     }
   }
 
   public static async deleteCategory(categoryId: number) {
-    await CategoryApi.deleteCategory(categoryId);
-    await CategoryManager.loadAll();
+    await CategoryApi.deleteCategory(categoryId)
+    await CategoryManager.loadAll()
   }
 }

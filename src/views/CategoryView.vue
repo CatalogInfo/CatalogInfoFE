@@ -60,7 +60,7 @@
         :placeholder="'link'"
       ></InputSlideBar>
 
-      <ArticleItem class="mt-4" v-for="article in articles" :key="article.id" :item="article"/>
+      <ArticleItem class="mt-4" v-for="article in articles" :key="article.id" :item="article" />
     </div>
   </div>
 </template>
@@ -98,7 +98,6 @@ const books = ref(computed(() => category.value?.books))
 const videos = ref(computed(() => category.value?.videos))
 const articles = ref(computed(() => category.value?.articles))
 
-
 const doToggle = () => {
   toggle.value = !toggle.value
 }
@@ -113,7 +112,7 @@ const submitVideo = async () => {
 
 const submitArticle = async () => {
   const linkString: string = String(BufferManager.get()?.value)
-  await ArticleManager.createArticle({ title: "Ti", link: linkString }, props.id)
+  await ArticleManager.createArticle({ title: 'Ti', link: linkString }, props.id)
 
   doToggle()
   clearInput()
@@ -132,7 +131,7 @@ const goToBook = (id: number) => {
 }
 
 const createBook = () => {
-  console.log(category.value);
+  console.log(category.value)
   router.push(`/categories/${props.id}/book`)
 }
 </script>

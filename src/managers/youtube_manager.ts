@@ -7,10 +7,10 @@ export default class YoutubeManager {
 
   private static getIdFromLink(link: string): string {
     if (link.includes('watch?v')) {
-      if(link.includes('&')){
-        return link.substring(link.indexOf('=')+1, link.indexOf("&"))
+      if (link.includes('&')) {
+        return link.substring(link.indexOf('=') + 1, link.indexOf('&'))
       }
-      return link.substring(link.indexOf('=')+1)
+      return link.substring(link.indexOf('=') + 1)
     }
 
     return link.substring(17)

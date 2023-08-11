@@ -32,7 +32,7 @@ const credentials = reactive({
 
 const tryRegister = async () => {
   if (!credentials.password || credentials.password !== credentials.repeatedPassword) {
-    ToastManager.showErrorToast("Passwords aren't equal");
+    ToastManager.showErrorToast("Passwords aren't equal")
 
     throw new Error("Passwords aren't equal")
   }

@@ -2,9 +2,9 @@ import CategoryApi from '@/api/category_api'
 import Article from '@/models/article'
 import { Collection, useRepo } from 'pinia-orm'
 import store from '../store/store'
-import ArticleResponse from '@/dtos/responses/article_response';
-import CategoryManager from './category_manager';
-import ArticleRequest from '@/dtos/requests/article_request';
+import ArticleResponse from '@/dtos/responses/article_response'
+import CategoryManager from './category_manager'
+import ArticleRequest from '@/dtos/requests/article_request'
 
 export default class ArticleManager {
   protected static get repository() {
@@ -20,7 +20,6 @@ export default class ArticleManager {
     const articles = response.data
 
     this.repository.save(this.getFormatedArticles(articles))
-
   }
 
   static getArticleById(id: number): Article | null {
@@ -32,7 +31,7 @@ export default class ArticleManager {
     const articleEntity = this.getFormatedArticle(response.data)
 
     this.repository.save(articleEntity)
-    await CategoryManager.loadAll();
+    await CategoryManager.loadAll()
   }
 
   private static getFormatedArticles(articles: Array<ArticleResponse>) {
@@ -43,12 +42,12 @@ export default class ArticleManager {
     return {
       id: article.id,
       link: article.link,
-      title: article.title,
+      title: article.title
     }
   }
 
   public static async deleteArticle(articleId: number, categoryId: number) {
-    await CategoryApi.deleteArticle(categoryId, articleId);
-    await CategoryManager.loadAll();
+    await CategoryApi.deleteArticle(categoryId, articleId)
+    await CategoryManager.loadAll()
   }
 }

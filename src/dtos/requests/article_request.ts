@@ -1,5 +1,4 @@
 export default interface ArticleRequest {
-    title: string
-    link: string
-  }
-  
+  title: string
+  link: string
+}

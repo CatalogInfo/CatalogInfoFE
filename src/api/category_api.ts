@@ -37,7 +37,8 @@ export default class CategoryApi {
   }
 
   public static async createChild(
-    categoryRequest: CategoryRequest, parentId: number
+    categoryRequest: CategoryRequest,
+    parentId: number
   ): Promise<BaseApiResponse<CategoryResponse>> {
     return await ApiFactory.getInstance(this.getOptions()).post<CategoryResponse, unknown>(
       '/' + parentId,
@@ -80,7 +81,7 @@ export default class CategoryApi {
     bookId: number
   ): Promise<BaseApiResponse<String>> {
     return await ApiFactory.getInstance(this.getOptions()).delete<String>(
-      '/' + categoryId + '/book/' +bookId
+      '/' + categoryId + '/book/' + bookId
     )
   }
 
@@ -108,15 +109,23 @@ export default class CategoryApi {
     )
   }
 
-  public static async getVideos(categoryId: number): Promise<BaseApiResponse<Array<VideoResponse>>> {
-    return await ApiFactory.getInstance(this.getOptions()).get<Array<VideoResponse>>(`/${categoryId}/videos`)
+  public static async getVideos(
+    categoryId: number
+  ): Promise<BaseApiResponse<Array<VideoResponse>>> {
+    return await ApiFactory.getInstance(this.getOptions()).get<Array<VideoResponse>>(
+      `/${categoryId}/videos`
+    )
   }
 
-  public static async getArticles(categoryId: number): Promise<BaseApiResponse<Array<ArticleResponse>>> {
-    return await ApiFactory.getInstance(this.getOptions()).get<Array<ArticleResponse>>(`/${categoryId}/articles`)
+  public static async getArticles(
+    categoryId: number
+  ): Promise<BaseApiResponse<Array<ArticleResponse>>> {
+    return await ApiFactory.getInstance(this.getOptions()).get<Array<ArticleResponse>>(
+      `/${categoryId}/articles`
+    )
   }
 
   public static async deleteCategory(categoryId: number): Promise<BaseApiResponse<String>> {
-    return await ApiFactory.getInstance(this.getOptions()).delete<String>(`/${categoryId}`);
+    return await ApiFactory.getInstance(this.getOptions()).delete<String>(`/${categoryId}`)
   }
 }

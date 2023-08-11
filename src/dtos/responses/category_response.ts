@@ -6,5 +6,5 @@ export default interface CategoryResponse {
   articles: number[]
   parent: number | null
   children: CategoryResponse[] | null
-  hasChildren: boolean 
+  hasChildren: boolean
 }

@@ -23,7 +23,6 @@ import ToastManager from '@/managers/toast_manager'
 
 const router = useRouter()
 
-
 const items = ref([
   {
     label: 'Home',
@@ -34,13 +33,13 @@ const items = ref([
     label: 'Categories',
     icon: 'pi pi-th-large',
     to: '/categories'
-  },
+  }
 ])
 
 const logout = () => {
-  AuthManager.logout();
-  ToastManager.showSuccessToast('Logout');
-  router.push("/auth/login");
+  AuthManager.logout()
+  ToastManager.showSuccessToast('Logout')
+  router.push('/auth/login')
 }
 
 await CategoryManager.loadAll()
