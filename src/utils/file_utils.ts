@@ -1,6 +1,6 @@
 export default class FileUtils {
   private static spaceSymbol: string = '&nbsp;'
-  private static nextLineSymbol: string = '<br>'
+  private static nextLineSymbol: string = '<br><br>'
 
   static async upload(e: any, spacesAmount: number) {
     const [file] = e.target.files

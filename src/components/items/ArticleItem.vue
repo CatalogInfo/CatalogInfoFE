@@ -22,8 +22,8 @@
 import Button from 'primevue/button'
 import Article from '@/models/article'
 import IconArticle from '../icons/IconArticle.vue'
-import DropdownItem from '@/components/menu/DropdownItem.vue'
-import Dropdown from '@/components/menu/Dropdown.vue'
+import DropdownItem from '@/components/menu/dropdown/DropdownItem.vue'
+import Dropdown from '@/components/menu/dropdown/Dropdown.vue'
 import ArticleManager from '@/managers/article_manager'
 
 const props = defineProps({

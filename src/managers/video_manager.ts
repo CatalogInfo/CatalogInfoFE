@@ -5,7 +5,6 @@ import store from '../store/store'
 import YoutubeManager from '@/managers/youtube_manager'
 import VideoResponse from '../dtos/responses/video_response'
 import CategoryApi from '@/api/category_api'
-import BaseApiResponse from '@/response/base_api_response'
 import CategoryManager from './category_manager'
 
 export default class VideoManager {

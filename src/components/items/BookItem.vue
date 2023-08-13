@@ -34,8 +34,8 @@ import IconFeather from '../icons/IconFeather.vue'
 import IconStyle from '../icons/IconStyle.vue'
 import IconBook from '../icons/IconBook.vue'
 import BookManager from '@/managers/book_manager'
-import DropdownItem from '@/components/menu/DropdownItem.vue'
-import Dropdown from '@/components/menu/Dropdown.vue'
+import DropdownItem from '@/components/menu/dropdown/DropdownItem.vue'
+import Dropdown from '@/components/menu/dropdown/Dropdown.vue'
 import { PropType } from 'vue'
 
 const props = defineProps({

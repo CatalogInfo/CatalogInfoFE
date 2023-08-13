@@ -32,8 +32,8 @@
 import Button from 'primevue/button'
 import Video from '@/models/video'
 import YouTube from 'vue3-youtube'
-import DropdownItem from '@/components/menu/DropdownItem.vue'
-import Dropdown from '@/components/menu/Dropdown.vue'
+import DropdownItem from '@/components/menu/dropdown/DropdownItem.vue'
+import Dropdown from '@/components/menu/dropdown/Dropdown.vue'
 import VideoManager from '@/managers/video_manager'
 
 const props = defineProps({

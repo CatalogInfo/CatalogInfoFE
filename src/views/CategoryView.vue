@@ -131,7 +131,6 @@ const goToBook = (id: number) => {
 }
 
 const createBook = () => {
-  console.log(category.value)
   router.push(`/categories/${props.id}/book`)
 }
 </script>
