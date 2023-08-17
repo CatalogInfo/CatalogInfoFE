@@ -3,7 +3,7 @@
   <InputText placeholder="type here.." type="text" class="rounded-xl" v-model="inputRef" />
   <div class="flex flex-row space-x-4 justify-center">
     <Button rounded @click="cancel()" icon="pi pi-times"></Button>
-    <Button rounded @click="$emit('save')" icon="pi pi-check"></Button>
+    <Button rounded @click="save()" icon="pi pi-check"></Button>
   </div>
 </div>
 
@@ -23,18 +23,18 @@ const props = defineProps({
         required: true,
     }
 })
-const emit = defineEmits(['cancel', 'save', 'update:input']);
+const emit = defineEmits(['cancel', 'update:input']);
 
 const inputRef = ref("");
 const top = ref<string>(props.offsetTop);
+
 const cancel = () => {
     inputRef.value = '';
     emit('cancel')
-    console.log(top.value)
 }
 
 const save = () => {
-    emit('update:input');
+    emit('update:input', inputRef.value);
 }
 
 </script>

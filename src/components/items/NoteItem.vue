@@ -1,45 +1,28 @@
 <template>
-  <div id="inp" class="relative flex flex-col" @mouseenter="selectSpanById()" @mouseleave="diselectSpanById()">
-    <div id="note" class="absolute right-2 top-0 rounded-full w-8 h-8 bg-slate-400 flex items-center justify-center">
-     <i class="pi pi-pencil"></i> 
-   </div>
-  </div>
+<div class="relative flex flex-col ease-out duration-200 border-2 rounded-lg p-8 m-3" :class="{ [`ease-in duration-1000 bg-slate-800`]: zoom }">
+    {{ text }}
+</div>
 </template>
 <script setup lang="ts">
-import NoteManager from '@/managers/note_manager';
-import { ref } from 'vue';
+import { PropType, ref, toRef } from 'vue';
+import {NoteType} from '@/managers/note_manager';
 
 const props = defineProps({
-    id: {
-        type: String,
+    note: {
+        type: Object as PropType<NoteType>,
+        required: true,
+    },
+    toZoom: {
+        type: Boolean,
         required: true,
     }
 })
 
-const top = ref(NoteManager.getNoteById(props.id)?.topOffset);
+const zoom = toRef(props, 'toZoom')
 
-const selectSpanById = () => {
-    const textLinkedByNote = <HTMLElement>document.getElementById(props.id);
-    textLinkedByNote.style.color = "green"; 
-};
-
-const diselectSpanById = () => {
-    const textLinkedByNote = <HTMLElement>document.getElementById(props.id);
-    textLinkedByNote.style.color = "white"; 
-};
+const text = ref(props.note.note);
 </script>
 <style scoped>
-#inp {
-    top: v-bind('top');
-}
-#note {
-    transition: 0.3s ease-out;
-}
-#note:hover {
-  transform: translate(-4px, 0px);
-  transition: 0.5s ease;
-}
-
 </style>
 
-    
+      
